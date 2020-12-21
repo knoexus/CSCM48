@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             ProfileSeeder::class,
             JourneySeeder::class,
-            RouteSeeder::class,
             CommentSeeder::class,
             LikeSeeder::class,
             ViewSeeder::class,
