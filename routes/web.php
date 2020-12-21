@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/user/{id}', 'App\Http\Controllers\UserController@show')->name('user.show');
+
+Route::get('/user/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('user.edit');
+
+Route::post('/user/{id}', 'App\Http\Controllers\UserController@update')->name('user.update');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
