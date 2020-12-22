@@ -25,7 +25,8 @@ class JourneyFactory extends Factory
         $users = User::pluck('id')->toArray();
         return [
             'title' => $this->faker->text($maxNbChars = 100),
-            'diffuculty' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 10),
+            'image' => $this->faker->imageUrl($width = 640, $height = 480),
+            'difficulty' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 10),
             'enjoyability' => $this->faker->randomFloat($nbMaxDecimals = 2, $min = 0, $max = 10),
             'would_recommend' => $this->faker->boolean($chanceOfGettingTrue = 50),
             'description' => $this->faker->text($maxNbChars = 240),

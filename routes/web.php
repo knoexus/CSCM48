@@ -23,6 +23,10 @@ Route::get('/user/{id}/edit', 'App\Http\Controllers\UserController@edit')->name(
 
 Route::post('/user/{id}', 'App\Http\Controllers\UserController@update')->name('user.update')->middleware('auth');
 
+Route::get('/user/{id}/journey/create', 'App\Http\Controllers\JourneyController@create')->name('journey.create')->middleware('auth');
+
+Route::post('/user/{id}/journey/create', 'App\Http\Controllers\JourneyController@create')->name('journey.create')->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

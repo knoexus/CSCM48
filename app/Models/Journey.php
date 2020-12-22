@@ -9,10 +9,16 @@ class Journey extends Model
 {
     use HasFactory;
 
-    public function routes() 
-    {
-        return $this->hasMany('App\Models\Route');
-    }
+    protected $fillable = [
+        'title',
+        'image',
+        'difficulty',
+        'enjoyability',
+        'would_recommend',
+        'enjoyability',
+        'description',
+        'user_id',
+    ];
 
     public function user()
     {
