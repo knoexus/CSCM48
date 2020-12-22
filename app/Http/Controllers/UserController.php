@@ -16,6 +16,10 @@ class UserController extends Controller
 
     public function edit($id) 
     {
+        if ($id != auth()->id()) {
+            return redirect('/user/'.$id);
+        }
+
         $profile = \App\Models\Profile::where('user_id', $id)->first();
 
         return view('user_edit', [
@@ -26,6 +30,10 @@ class UserController extends Controller
 
     public function update(Request $req, $id) 
     {
+        if ($id != auth()->id()) {
+            return redirect('/user/'.$id);
+        }
+
         $this->validate($req, [
             'country' => 'required', 
             'description' => 'required', 
