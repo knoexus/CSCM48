@@ -28,16 +28,18 @@ class UserController extends Controller
     {
         $this->validate($req, [
             'country' => 'required', 
-            'body' => 'required', 
-            'image' => 'required', 
+            'description' => 'required', 
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        $imgPath = $req->file('image')->store('uploads', 'public'); 
 
         $profile = \App\Models\Profile::updateOrCreate(
             ['user_id' => $id],
             [
                 'country' => $req->country, 
                 'description' => $req->description,
-                'image' => $req->image,
+                'image' => $imgPath,
                 'user_id' => $id
             ]
         );
