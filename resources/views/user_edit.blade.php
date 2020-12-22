@@ -15,7 +15,10 @@
         </div>
         <div class="form-group">
             <label for="image">Image</label>
-            <input type="file" class="form-control-file" name="image" placeholder="Image" value="{{ $profile ? $profile->image : '' }}">
+            <div class="mb-2">
+                <img src="{{ $profile ? '/storage/'.$profile->image : '' }}" height="50" width="50"/>
+            </div>
+            <input type="file" class="form-control-file" name="image" placeholder="Image">
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>
