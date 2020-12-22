@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-forms.css') }}">
+@endsection
+
 @section('content')
 <div class="container mt-3">
     <h3>Create new journey</h3>
@@ -24,7 +28,7 @@
             <output>5</output>
         </div>
         <div class="form-group mt-3">
-            <label class="form-check-label">Would Recommend</label>
+            <label class="form-check-label">Would Recommend</label></br>
             <input name="would_recommend" type="checkbox" class="form-check-input" value="true" checked>
         </div>
         <div class="form-group mt-3">
