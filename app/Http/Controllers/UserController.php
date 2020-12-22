@@ -8,7 +8,7 @@ class UserController extends Controller
 {
     public function show($id) 
     {
-        $user = \App\Models\User::find($id);
+        $user = \App\Models\User::findOrFail($id);
         return view('user', [
             'user'=>$user
         ]);
