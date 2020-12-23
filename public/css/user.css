@@ -1,0 +1,21 @@
+.user-picture {
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.user-username::before {
+    content: "@";
+    color: gray;
+}
+
+.user-main_info {
+    padding: 3.5px;
+}
+
+.user-main_info::after {
+    content: "\a0";
+    display: block;
+    margin-top: 1rem;
+    line-height: 1px;
+    border-top: 0.8px solid lightgray; 
+}
