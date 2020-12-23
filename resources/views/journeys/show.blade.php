@@ -36,7 +36,7 @@
             @if($journey->comments->count() == 0)
                 <span>No comments</span>
             @endif
-            @foreach($journey->comments->sortByDesc('created_at') as $comment)
+            @foreach($comments->sortByDesc('created_at') as $comment)
                 <div class="col-sm-2 col-xl-2 border">
                     <span>{{ $comment->body }}</span><br>
                     <span>Created at {{ $comment->created_at->format('d/m/Y H:i') }}</span>
@@ -46,6 +46,9 @@
                     @endif
                 </div>
             @endforeach
+        </div>
+        <div class="mt-10">
+            {!! $comments->render() !!}
         </div>
     </div> 
 </div>

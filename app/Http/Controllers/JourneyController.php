@@ -50,6 +50,9 @@ class JourneyController extends Controller
             ['id', '=', $journey_id],
             ['user_id', '=', $id],
         ])->firstOrFail();
-        return view('journeys.show', compact('journey'));
+
+        $comments = $journey->comments()->paginate(5);
+
+        return view('journeys.show', compact('journey', 'comments'));
     }
 }
