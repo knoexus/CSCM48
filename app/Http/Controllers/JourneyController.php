@@ -9,12 +9,12 @@ class JourneyController extends Controller
     public function create(Request $req, $id) 
     {
         if ($id != auth()->id()) {
-            return redirect('/user/'.$id);
+            return redirect('/users/'.$id);
         }
 
         if ($req->isMethod('get')) {
             $user = \App\Models\User::find($id);
-            return view('journey.create', [
+            return view('journeys.create', [
                 'id'=>$id
             ]);
         } 
@@ -41,7 +41,7 @@ class JourneyController extends Controller
                 ]
             );
     
-            return redirect('/user/'.$id);
+            return redirect('/users/'.$id);
         }
     }
 
@@ -50,6 +50,6 @@ class JourneyController extends Controller
             ['id', '=', $journey_id],
             ['user_id', '=', $id],
         ])->firstOrFail();
-        return view('journey.show', compact('journey'));
+        return view('journeys.show', compact('journey'));
     }
 }

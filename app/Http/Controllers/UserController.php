@@ -10,18 +10,18 @@ class UserController extends Controller
     {
         $user = \App\Models\User::findOrFail($id);
         $journeys = $user->journeys()->paginate(5);
-        return view('user', compact('user', 'journeys'));
+        return view('users.show', compact('user', 'journeys'));
     }
 
     public function edit($id) 
     {
         if ($id != auth()->id()) {
-            return redirect('/user/'.$id);
+            return redirect('/users/'.$id);
         }
 
         $profile = \App\Models\Profile::where('user_id', $id)->first();
 
-        return view('user_edit', [
+        return view('users.edit', [
             'id'=>$id,
             'profile'=>$profile
         ]);
@@ -30,7 +30,7 @@ class UserController extends Controller
     public function update(Request $req, $id) 
     {
         if ($id != auth()->id()) {
-            return redirect('/user/'.$id);
+            return redirect('/users/'.$id);
         }
 
         $this->validate($req, [

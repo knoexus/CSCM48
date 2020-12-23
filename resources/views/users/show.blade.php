@@ -20,18 +20,18 @@
             </div>
             <div class="ml-4">
                 @if (Auth::user()->id == $user->id)
-                    <a class="btn btn-outline-info" href="/user/{{ Auth::user()->id }}/edit" role="button">Edit profile</a>
+                    <a class="btn btn-outline-info" href="/users/{{ Auth::user()->id }}/edit" role="button">Edit profile</a>
                 @endif
             </div>
         </div>
     </div>
     <div class="journeys">
         @if (Auth::user()->id == $user->id)
-            <a class="btn btn-outline-secondary mt-4" href="/user/{{ Auth::user()->id }}/journey/create" role="button">Share new journey</a>
+            <a class="btn btn-outline-secondary mt-4" href="/users/{{ Auth::user()->id }}/journeys/create" role="button">Share new journey</a>
         @endif
         <div>
             @foreach($journeys as $journey)
-                <a class="journey-referrer" href="/user/{{ $user->id }}/journey/{{ $journey->id }}">
+                <a class="journey-referrer" href="/users/{{ $user->id }}/journeys/{{ $journey->id }}">
                     <div class="journey mt-4 border">
                         <!-- <a href="/p/{{ $journey->id }}"> -->
                         <h4>{{ $journey->title }}<h4>

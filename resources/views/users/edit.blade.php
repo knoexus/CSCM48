@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container mt-3">
-    <form method="POST" enctype="multipart/form-data" action="{{ route('user.update', $id) }}">
+    <form method="POST" enctype="multipart/form-data" action="{{ route('users.update', $id) }}">
         @csrf
         <div class="form-group">
             <label for="country">Country</label>

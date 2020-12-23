@@ -17,17 +17,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user/{id}', 'App\Http\Controllers\UserController@show')->name('user.show');
+Route::get('/users/{id}', 'App\Http\Controllers\UserController@show')->name('users.show');
 
-Route::get('/user/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('user.edit')->middleware('auth');
+Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit')->middleware('auth');
 
-Route::post('/user/{id}', 'App\Http\Controllers\UserController@update')->name('user.update')->middleware('auth');
+Route::post('/users/{id}', 'App\Http\Controllers\UserController@update')->name('users.update')->middleware('auth');
 
-Route::get('/user/{id}/journey/create', 'App\Http\Controllers\JourneyController@create')->name('journey.create')->middleware('auth');
+Route::get('/users/{id}/journeys/create', 'App\Http\Controllers\JourneyController@create')->name('journeys.create')->middleware('auth');
 
-Route::post('/user/{id}/journey/create', 'App\Http\Controllers\JourneyController@create')->name('journey.create')->middleware('auth');
+Route::post('/users/{id}/journeys/create', 'App\Http\Controllers\JourneyController@create')->name('journeys.create')->middleware('auth');
 
-Route::get('/user/{id}/journey/{journey_id}', 'App\Http\Controllers\JourneyController@show')->name('journey.show');
+Route::get('/users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyController@show')->name('journeys.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

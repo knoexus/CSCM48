@@ -14,7 +14,7 @@
         <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span><br>
         <span>Difficulty: {{ $journey->enjoyability ?? "Not Set" }}</span><br>
         <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
-        <span>Posted by <a class="user-username" href="/user/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a> on {{ $journey->created_at->format('d/m/Y h:m') }}</span>
+        <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a> on {{ $journey->created_at->format('d/m/Y h:m') }}</span>
         @if (Auth::user()->id == $journey->user->id)
             <a class="btn btn-outline-info" href="#" role="button">Edit post</a>
         @endif

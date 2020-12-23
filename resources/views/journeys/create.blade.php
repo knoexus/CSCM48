@@ -7,7 +7,7 @@
 @section('content')
 <div class="container mt-3">
     <h3>Create new journey</h3>
-    <form method="POST" enctype="multipart/form-data" action="{{ route('journey.create', $id) }}">
+    <form method="POST" enctype="multipart/form-data" action="{{ route('journeys.create', $id) }}">
         @csrf
         <div class="form-group mt-3">
             <label for="title">Title</label>
