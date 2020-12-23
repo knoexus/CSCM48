@@ -25,10 +25,10 @@
             </div>
         </div>
     </div>
-    <div class="posts mt-4">
-        <a class="btn btn-outline-secondary" href="/user/{{ Auth::user()->id }}/journey/create" role="button">Share new journey</a>
-    </div>
     <div class="journeys">
+        @if (Auth::user()->id == $user->id)
+            <a class="btn btn-outline-secondary mt-4" href="/user/{{ Auth::user()->id }}/journey/create" role="button">Share new journey</a>
+        @endif
         <div>
             @foreach($journeys as $journey)
                 <div class="journey mt-4 border">
