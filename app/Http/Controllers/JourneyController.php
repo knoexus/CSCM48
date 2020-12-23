@@ -19,11 +19,14 @@ class JourneyController extends Controller
             ]);
         } 
         else {
-            // $this->validate($req, [
-            //     'country' => 'required', 
-            //     'description' => 'required', 
-            //     'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            // ]);
+            $this->validate($req, [
+                'title' => 'required|string|max:100', 
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'description' => 'string|max:255', 
+                'difficulty' => 'numeric',
+                'enjoyability' => 'numeric',
+                'would_recommend' => 'boolean'
+            ]);
     
             $imgPath = $req->file('image')->store('uploads', 'public'); 
     
