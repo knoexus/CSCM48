@@ -38,7 +38,10 @@
                         <img src="/storage/{{ $journey->image }}" height="100" width="100">
                         <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
                         <span>Difficulty: {{ $journey->enjoyability ?? "Not Set" }}</span>
-                        <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span>
+                        <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
+                        <span>C: {{ $journey->comments->count() }}</span>
+                        <span>L: x</span>
+                        <span>V: x|x</span>
                     </div>
                 </a>
             @endforeach
