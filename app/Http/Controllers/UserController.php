@@ -9,9 +9,8 @@ class UserController extends Controller
     public function show($id) 
     {
         $user = \App\Models\User::findOrFail($id);
-        return view('user', [
-            'user'=>$user
-        ]);
+        $journeys = $user->journeys()->paginate(5);
+        return view('user', compact('user', 'journeys'));
     }
 
     public function edit($id) 
