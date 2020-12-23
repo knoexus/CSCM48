@@ -27,6 +27,8 @@ Route::get('/user/{id}/journey/create', 'App\Http\Controllers\JourneyController@
 
 Route::post('/user/{id}/journey/create', 'App\Http\Controllers\JourneyController@create')->name('journey.create')->middleware('auth');
 
+Route::get('/user/{id}/journey/{journey_id}', 'App\Http\Controllers\JourneyController@show')->name('journey.show');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

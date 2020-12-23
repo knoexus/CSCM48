@@ -44,4 +44,12 @@ class JourneyController extends Controller
             return redirect('/user/'.$id);
         }
     }
+
+    public function show($id, $journey_id) {
+        $journey = \App\Models\Journey::where([
+            ['id', '=', $journey_id],
+            ['user_id', '=', $id],
+        ])->firstOrFail();
+        return view('journey.show', compact('journey'));
+    }
 }

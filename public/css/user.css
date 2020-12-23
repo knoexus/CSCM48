@@ -3,6 +3,14 @@
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
 }
 
+a.user-username{
+    color: gray; 
+}
+
+a.user-username:hover{
+    color: gray; 
+}
+
 .user-username::before {
     content: "@";
     color: gray;

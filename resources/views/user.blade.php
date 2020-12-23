@@ -31,14 +31,16 @@
         @endif
         <div>
             @foreach($journeys as $journey)
-                <div class="journey mt-4 border">
-                    <!-- <a href="/p/{{ $journey->id }}"> -->
-                    <h4>{{ $journey->title }}<h4>
-                    <img src="/storage/{{ $journey->image }}" height="100" width="100">
-                    <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
-                    <span>Difficulty: {{ $journey->enjoyability ?? "Not Set" }}</span>
-                    <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span>
-                </div>
+                <a class="journey-referrer" href="/user/{{ $user->id }}/journey/{{ $journey->id }}">
+                    <div class="journey mt-4 border">
+                        <!-- <a href="/p/{{ $journey->id }}"> -->
+                        <h4>{{ $journey->title }}<h4>
+                        <img src="/storage/{{ $journey->image }}" height="100" width="100">
+                        <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
+                        <span>Difficulty: {{ $journey->enjoyability ?? "Not Set" }}</span>
+                        <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span>
+                    </div>
+                </a>
             @endforeach
         </div>
         <div class="mt-10">
