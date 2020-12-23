@@ -29,6 +29,8 @@ Route::post('/users/{id}/journeys/create', 'App\Http\Controllers\JourneyControll
 
 Route::get('/users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyController@show')->name('journeys.show');
 
+Route::post('/users/{id}/journeys/{journey_id}/comments/create', 'App\Http\Controllers\CommentController@create')->name('comments.create')->middleware('auth');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');

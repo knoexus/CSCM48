@@ -9,6 +9,12 @@ class Comment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'body',
+        'user_id',
+        'journey_id',
+    ];
+
     public function journey() 
     {
         return $this->belongsTo('App\Models\Journey');

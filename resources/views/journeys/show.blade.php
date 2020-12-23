@@ -14,13 +14,14 @@
         <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span><br>
         <span>Difficulty: {{ $journey->enjoyability ?? "Not Set" }}</span><br>
         <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
-        <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a> on {{ $journey->created_at->format('d/m/Y h:m') }}</span>
+        <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a> at {{ $journey->created_at->format('d/m/Y H:i') }}</span>
         @if (Auth::user()->id == $journey->user->id)
             <a class="btn btn-outline-info" href="#" role="button">Edit post</a>
         @endif
     </div>
-    <div class="comments">
-        <form method="POST">
+    <div class="comments mt-5">
+        <h4>Comments</h4>
+        <form method="POST" action="{{ route('comments.create', [$journey->user->id,  $journey->id]) }}">
             @csrf
             <div class="form-group mt-3">
                 <label>New comment:</label>
@@ -29,7 +30,19 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         <form>
         <div>
-            <span>No comments</span>
+            @if($journey->comments->count() == 0)
+                <span>No comments</span>
+            @endif
+            @foreach($journey->comments->sortByDesc('created_at') as $comment)
+                <div class="col-sm-2 col-xl-2 border">
+                    <span>{{ $comment->body }}</span><br>
+                    <span>Created at {{ $comment->created_at->format('d/m/Y H:i') }}</span>
+                    <span>Posted by <a class="user-username" href="/users/{{ $comment->user->id }}">{{ $comment->user->user_name }}</a></span>
+                    @if (Auth::user()->id == $comment->user->id)
+                        <a class="btn btn-outline-info" href="#" role="button">Edit comment</a>
+                    @endif
+                </div>
+            @endforeach
         </div>
     </div> 
 </div>
