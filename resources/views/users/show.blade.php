@@ -38,7 +38,7 @@
             @endif
         @endif
         <div>
-            @foreach($journeys as $journey)
+            @foreach($journeys->sortByDesc('created_at') as $journey)
                 <a class="journey-referrer" href="/users/{{ $user->id }}/journeys/{{ $journey->id }}">
                     <div class="journey mt-4">
                         <!-- <a href="/p/{{ $journey->id }}"> -->
@@ -47,6 +47,8 @@
                         <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
                         <span>Difficulty: {{ $journey->difficulty ?? "Not Set" }}</span>
                         <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
+                        <span>Posted at {{ $journey->created_at->format('d/m/Y H:i') }}</span><br>
+                        <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a></span><br>
                         <span>C: {{ $journey->comments->count() }}</span>
                         <span>L: x</span>
                         <span>V: x|x</span>
