@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -14,7 +13,7 @@ class CommentController extends Controller
 
         $comment = \App\Models\Comment::create([
             'body' => $req->body, 
-            'user_id' => Auth::user()->id,
+            'user_id' => auth()->id(),
             'journey_id' => $journey_id
         ]);
 

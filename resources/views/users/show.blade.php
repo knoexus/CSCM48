@@ -23,15 +23,19 @@
                 </div>
             </div>
             <div class="ml-4">
-                @if (Auth::user()->id == $user->id)
-                    <a class="btn btn-outline-info" href="/users/{{ Auth::user()->id }}/edit" role="button">Edit profile</a>
+                @if (Auth::user())
+                    @if (Auth::user()->id == $user->id)
+                        <a class="btn btn-outline-info" href="/users/{{ Auth::user()->id }}/edit" role="button">Edit profile</a>
+                    @endif
                 @endif
             </div>
         </div>
     </div>
     <div class="journeys">
-        @if (Auth::user()->id == $user->id)
-            <a class="btn btn-outline-secondary mt-4" href="/users/{{ Auth::user()->id }}/journeys/create" role="button">Share new journey</a>
+        @if (Auth::user())
+            @if (Auth::user()->id == $user->id)
+                <a class="btn btn-outline-secondary mt-4" href="/users/{{ Auth::user()->id }}/journeys/create" role="button">Share new journey</a>
+            @endif
         @endif
         <div>
             @foreach($journeys as $journey)

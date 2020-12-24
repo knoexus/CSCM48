@@ -18,8 +18,10 @@
         <span>C: {{ $journey->comments->count() }}</span>
         <span>L: x</span>
         <span>V: x|x</span>
-        @if (Auth::user()->id == $journey->user->id)
-            <a class="btn btn-outline-info" href="#" role="button">Edit post</a>
+        @if (Auth::user())
+            @if (Auth::user()->id == $journey->user->id)
+                <a class="btn btn-outline-info" href="#" role="button">Edit post</a>
+            @endif
         @endif
     </div>
     <div class="comments mt-5">
@@ -41,8 +43,10 @@
                     <span>{{ $comment->body }}</span><br>
                     <span>Created at {{ $comment->created_at->format('d/m/Y H:i') }}</span>
                     <span>Posted by <a class="user-username" href="/users/{{ $comment->user->id }}">{{ $comment->user->user_name }}</a></span>
-                    @if (Auth::user()->id == $comment->user->id)
-                        <a class="btn btn-outline-info" href="#" role="button">Edit comment</a>
+                    @if (Auth::user())
+                        @if (Auth::user()->id == $comment->user->id)
+                            <a class="btn btn-outline-info" href="#" role="button">Edit comment</a>
+                        @endif
                     @endif
                 </div>
             @endforeach
