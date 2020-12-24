@@ -12,37 +12,37 @@ class JourneyController extends Controller
             return redirect('/users/'.$id);
         }
 
-        if ($req->isMethod('get')) {
-            $user = \App\Models\User::find($id);
-            return view('journeys.create', [
-                'id'=>$id
-            ]);
-        } 
-        else {
-            $this->validate($req, [
-                'title' => 'required|string|max:100', 
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description' => 'string|max:255|nullable', 
-                'difficulty' => 'numeric',
-                'enjoyability' => 'numeric',
-                'would_recommend' => 'boolean'
-            ]);
-    
-            $imgPath = $req->file('image')->store('uploads', 'public'); 
-    
-            $journey = \App\Models\Journey::create([
-                    'title' => $req->title, 
-                    'image' => $imgPath,
-                    'difficulty' => intval($req->difficulty), 
-                    'enjoyability' => intval($req->enjoyability), 
-                    'would_recommend' => boolval($req->would_recommend), 
-                    'description' => $req->description, 
-                    'user_id' => $id
-                ]
-            );
-    
-            return redirect('/users/'.$id);
-        }
+        $user = \App\Models\User::find($id);
+        return view('journeys.create', [
+            'id'=>$id
+        ]);
+    }
+
+    public function store(Request $req, $id) 
+    {
+        $this->validate($req, [
+            'title' => 'required|string|max:100', 
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'string|max:255|nullable', 
+            'difficulty' => 'numeric',
+            'enjoyability' => 'numeric',
+            'would_recommend' => 'boolean'
+        ]);
+
+        $imgPath = $req->file('image')->store('uploads', 'public'); 
+
+        $journey = \App\Models\Journey::create([
+                'title' => $req->title, 
+                'image' => $imgPath,
+                'difficulty' => intval($req->difficulty), 
+                'enjoyability' => intval($req->enjoyability), 
+                'would_recommend' => boolval($req->would_recommend), 
+                'description' => $req->description, 
+                'user_id' => $id
+            ]
+        );
+
+        return redirect('/users/'.$id);
     }
 
     public function edit($id, $journey_id) 

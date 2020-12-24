@@ -26,7 +26,7 @@
     </div>
     <div class="comments mt-5">
         <h4>Comments</h4>
-        <form method="POST" action="{{ route('comments.create', [$journey->user->id,  $journey->id]) }}">
+        <form method="POST" action="{{ route('comments.store', [$journey->user->id,  $journey->id]) }}">
             @csrf
             <div class="form-group mt-3">
                 <label>New comment:</label>

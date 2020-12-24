@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function create(Request $req, $id, $journey_id) {
+    public function store(Request $req, $id, $journey_id) {
         $this->validate($req, [
             'body' => 'required|string|max:255', 
         ]);
