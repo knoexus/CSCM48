@@ -32,19 +32,19 @@
             @endif
         </div>
         <div class="form-group mt-3">
-            <label for="difficulty">Difficulty</label></br>
-            <input name="difficulty" type="range" min="0" max="10" oninput="this.nextElementSibling.value = this.value" value="{{ old('difficulty') ?? ($journey ? $journey->difficulty : '5')  }}">
-            <output>{{ old('difficulty') ?? ($journey ? $journey->difficulty : '5')  }}</output>
-            @if ($errors->has('difficulty'))
-                <span class="text-danger">{{ $errors->first('difficulty') }}</span>
-            @endif
-        </div>
-        <div class="form-group mt-3">
             <label for="enjoyability">Enjoyability</label></br>
-            <input name="enjoyability" type="range" min="0" max="10" oninput="this.nextElementSibling.value = this.value" value="{{ old('enjoyability') ?? ($journey ? $journey->enjoyability : '5')  }}">
+            <input name="enjoyability" type="range" min="1" max="10" oninput="this.nextElementSibling.value = this.value" value="{{ old('enjoyability') ?? ($journey ? $journey->enjoyability : '5')  }}">
             <output>{{ old('enjoyability') ?? ($journey ? $journey->enjoyability : '5') }}</output>
             @if ($errors->has('enjoyability'))
                 <span class="text-danger">{{ $errors->first('enjoyability') }}</span>
+            @endif
+        </div>
+        <div class="form-group mt-3">
+            <label for="difficulty">Difficulty</label></br>
+            <input name="difficulty" type="range" min="1" max="10" oninput="this.nextElementSibling.value = this.value" value="{{ old('difficulty') ?? ($journey ? $journey->difficulty : '5')  }}">
+            <output>{{ old('difficulty') ?? ($journey ? $journey->difficulty : '5')  }}</output>
+            @if ($errors->has('difficulty'))
+                <span class="text-danger">{{ $errors->first('difficulty') }}</span>
             @endif
         </div>
         <div class="form-group mt-3">

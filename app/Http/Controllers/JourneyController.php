@@ -24,8 +24,8 @@ class JourneyController extends Controller
             'title' => 'required|string|max:100', 
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'description' => 'string|max:255|nullable', 
-            'difficulty' => 'numeric',
-            'enjoyability' => 'numeric',
+            'difficulty' => 'numeric|min:1|max:10',
+            'enjoyability' => 'numeric|min:1|max:10',
             'would_recommend' => 'boolean'
         ]);
 
@@ -69,8 +69,8 @@ class JourneyController extends Controller
             'title' => 'required|string|max:100', 
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048|nullable',
             'description' => 'string|max:255|nullable', 
-            'difficulty' => 'numeric',
-            'enjoyability' => 'numeric',
+            'difficulty' => 'numeric|min:1|max:10',
+            'enjoyability' => 'numeric|min:1|max:10',
             'would_recommend' => 'boolean'
         ]);
 
