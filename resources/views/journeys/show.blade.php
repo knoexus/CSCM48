@@ -31,6 +31,9 @@
             <div class="form-group mt-3">
                 <label>New comment:</label>
                 <textarea name="body" class="form-control" rows="2" placeholder="Comment"></textarea>
+                @if ($errors->has('body'))
+                    <span class="text-danger">{{ $errors->first('body') }}</span>
+                @endif
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         <form>
