@@ -22,7 +22,7 @@ class JourneyController extends Controller
             $this->validate($req, [
                 'title' => 'required|string|max:100', 
                 'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                'description' => 'string|max:255', 
+                'description' => 'string|max:255|nullable', 
                 'difficulty' => 'numeric',
                 'enjoyability' => 'numeric',
                 'would_recommend' => 'boolean'

@@ -10,7 +10,11 @@
     <div class="user-main_info">
         <div class="d-flex">
             <div>
-                <img class="user-picture" src="/storage/{{ $user->profile->image }}" alt="profile Pic" height="200" width="200"/>
+                @if ($user->profile)
+                    @if ($user->profile->image)
+                        <img class="user-picture" src="/storage/{{ $user->profile->image }}" alt="profile Pic" height="200" width="200"/>
+                    @endif
+                @endif
             </div>
             <div class="ml-4 d-flex flex-column">
                 <div class="mt-4">

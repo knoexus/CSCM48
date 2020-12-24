@@ -6,19 +6,31 @@
         @csrf
         <div class="form-group">
             <label for="country">Country</label>
-            <input type="text" class="form-control" name="country" placeholder="Country" value="{{ $profile ? $profile->country: '' }}">
-            <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+            <input type="text" class="form-control" name="country" placeholder="Country" value="{{ (old('country') || old('country') === '') ? old('country') : ($profile ? $profile->country: '') }}">
+            @if ($errors->has('country'))
+                <span class="text-danger">{{ $errors->first('country') }}</span>
+            @endif
         </div>
         <div class="form-group">
             <label for="description">Description</label>
-            <input type="text" class="form-control" name="description" placeholder="Description" value="{{ $profile ? $profile->description : '' }}">
+            <input type="text" class="form-control" name="description" placeholder="Description" value="{{ (old('description') || old('description') === '') ? old('description') : ($profile ? $profile->description : '') }}">
+            @if ($errors->has('description'))
+                <span class="text-danger">{{ $errors->first('description') }}</span>
+            @endif
         </div>
         <div class="form-group">
             <label for="image">Image</label>
-            <div class="mb-2">
-                <img src="{{ $profile ? '/storage/'.$profile->image : '' }}" height="50" width="50"/>
-            </div>
+            @if ($profile)
+                @if ($profile->image)
+                    <div class="mb-2">
+                        <img src="{{ '/storage/'.$profile->image }}" height="50" width="50"/>
+                    </div>
+                @endif        
+            @endif
             <input type="file" class="form-control-file" name="image" placeholder="Image">
+            @if ($errors->has('image'))
+                <span class="text-danger">{{ $errors->first('image') }}</span>
+            @endif
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

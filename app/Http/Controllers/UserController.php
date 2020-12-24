@@ -34,21 +34,25 @@ class UserController extends Controller
         }
 
         $this->validate($req, [
-            'country' => 'required', 
-            'description' => 'required', 
+            'country' => 'string|max:100|nullable', 
+            'description' => 'string|max:255|nullable', 
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $imgPath = $req->file('image')->store('uploads', 'public'); 
+        $fields = [
+            'country' => $req->country, 
+            'description' => $req->description,
+            'user_id' => $id
+        ];
 
+        if ($req->image) {
+            $imgPath = $req->file('image')->store('uploads', 'public'); 
+            $fields['image'] = $imgPath;
+        }
+        
         $profile = \App\Models\Profile::updateOrCreate(
             ['user_id' => $id],
-            [
-                'country' => $req->country, 
-                'description' => $req->description,
-                'image' => $imgPath,
-                'user_id' => $id
-            ]
+            $fields
         );
 
         return redirect('/');
