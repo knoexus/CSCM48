@@ -36,7 +36,7 @@
         <div>
             @foreach($journeys as $journey)
                 <a class="journey-referrer" href="/users/{{ $user->id }}/journeys/{{ $journey->id }}">
-                    <div class="journey mt-4 border">
+                    <div class="journey mt-4">
                         <!-- <a href="/p/{{ $journey->id }}"> -->
                         <h4>{{ $journey->title }}<h4>
                         <img src="/storage/{{ $journey->image }}" height="100" width="100">
