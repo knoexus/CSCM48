@@ -12,3 +12,11 @@ a.journey-referrer {
     color: #000000; 
     text-decoration: none; 
 } 
+
+.likeGlyph{
+    cursor: pointer;
+}
+
+.likeGlyph-entered, .likeGlyph:hover{
+    color: red;
+}

@@ -8,7 +8,7 @@
 @section('content')
 <div>
     <div class="journey-journey-full mt-3 d-flex flex-column">
-        <h4>{{ $journey->title }}<h4>
+        <h4>{{ $journey->title }}</h4>
         <img src="/storage/{{ $journey->image }}" height="100" width="100">
         <span>Description: {{ $journey->description ?? "Not Set" }}</span><br>
         <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span><br>
