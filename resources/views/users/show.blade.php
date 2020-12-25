@@ -51,7 +51,7 @@
                         <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a></span><br>
                         <span>C: {{ $journey->comments->count() }}</span>
                         <span>L: x</span>
-                        <span>V: x|x</span>
+                        <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique(['user_id', 'journey_id'])->count() }}</span>
                     </div>
                 </a>
             @endforeach

@@ -17,7 +17,7 @@
         <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a> at {{ $journey->created_at->format('d/m/Y H:i') }}</span><br>
         <span>C: {{ $journey->comments->count() }}</span>
         <span>L: x</span>
-        <span>V: x|x</span>
+        <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique('user_id')->count() }}</span>
         @if (Auth::user())
             @if (Auth::user()->id == $journey->user->id)
                 <a class="btn btn-outline-info" href="/users/{{ $journey->user->id }}/journeys/{{ $journey->id }}/edit" role="button">Edit post</a>

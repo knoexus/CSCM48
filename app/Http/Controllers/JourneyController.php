@@ -98,9 +98,18 @@ class JourneyController extends Controller
 
     public function show($id, $journey_id) {
         $journey = \App\Models\Journey::where([
-            ['id', '=', $journey_id],
-            ['user_id', '=', $id],
+            ['id', $journey_id],
+            ['user_id', $id],
         ])->firstOrFail();
+
+        // view the journey
+        $a_id = auth()->id();
+        if ($journey && $a_id && $a_id != $id) {
+            $view = \App\Models\View::create([
+                'journey_id' => $journey_id,
+                'user_id' => $a_id
+            ]);
+        }
 
         $comments = $journey->comments()->paginate(5);
 
