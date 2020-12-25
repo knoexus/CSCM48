@@ -9,6 +9,12 @@ class Like extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'journey_id',
+        'user_id'
+    ];
+
+
     public function journey() 
     {
         return $this->belongsTo('App\Models\Journey');

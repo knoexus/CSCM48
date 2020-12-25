@@ -102,17 +102,26 @@ class JourneyController extends Controller
             ['user_id', $id],
         ])->firstOrFail();
 
-        // view the journey
+        // view the journey and get like if exist
         $a_id = auth()->id();
-        if ($journey && $a_id && $a_id != $id) {
-            $view = \App\Models\View::create([
-                'journey_id' => $journey_id,
-                'user_id' => $a_id
-            ]);
-        }
+        $like = null;
+
+        if ($journey && $a_id) {
+            $like = \App\Models\Like::where([
+                ['journey_id', $journey_id],
+                ['user_id', $a_id]
+            ])->first();    
+
+            if ($a_id != $id) {
+                $view = \App\Models\View::create([
+                    'journey_id' => $journey_id,
+                    'user_id' => $a_id
+                ]);
+            }
+        } 
 
         $comments = $journey->comments()->paginate(5);
 
-        return view('journeys.show', compact('journey', 'comments'));
+        return view('journeys.show', compact('journey', 'comments', 'like'));
     }
 }

@@ -16,7 +16,7 @@
         <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
         <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a> at {{ $journey->created_at->format('d/m/Y H:i') }}</span><br>
         <span>C: {{ $journey->comments->count() }}</span>
-        <span>L: x</span>
+        <div class="like" data-uId="{{ $journey->user->id }}" data-journeyId="{{ $journey->id }}" data-likeId="{{ $like ? $like->id : 'null' }}" data-likeCount="{{ $journey->likes->count() }}"></div>
         <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique('user_id')->count() }}</span>
         @if (Auth::user())
             @if (Auth::user()->id == $journey->user->id)
