@@ -32,28 +32,28 @@
         </div>
     </div>
     <div class="journeys">
+        <h4 class="mt-3">Journeys</h4>
         @if (Auth::user())
             @if (Auth::user()->id == $user->id)
-                <a class="btn btn-outline-secondary mt-4" href="/users/{{ Auth::user()->id }}/journeys/create" role="button">Share new journey</a>
+            <div class="mt-4">
+                <a class="btn btn-outline-secondary" href="/users/{{ Auth::user()->id }}/journeys/create" role="button">Share new journey</a>
+            </div>
             @endif
         @endif
         <div>
             @foreach($journeys->sortByDesc('created_at') as $journey)
-                <a class="journey-referrer" href="/users/{{ $user->id }}/journeys/{{ $journey->id }}">
-                    <div class="journey mt-4">
-                        <!-- <a href="/p/{{ $journey->id }}"> -->
-                        <h4>{{ $journey->title }}<h4>
-                        <img src="/storage/{{ $journey->image }}" height="100" width="100">
-                        <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
-                        <span>Difficulty: {{ $journey->difficulty ?? "Not Set" }}</span>
-                        <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
-                        <span>Posted at {{ $journey->created_at->format('d/m/Y H:i') }}</span><br>
-                        <span>Posted by <a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a></span><br>
-                        <span>C: {{ $journey->comments->count() }}</span>
-                        <span>L: x</span>
-                        <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique(['user_id', 'journey_id'])->count() }}</span>
-                    </div>
-                </a>
+            <div class="journey mt-4" onclick="window.location.href='/users/{{ $user->id }}/journeys/{{ $journey->id }}';">
+                <h4>{{ $journey->title }}</h4>
+                <img src="/storage/{{ $journey->image }}" height="100" width="100">
+                <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
+                <span>Difficulty: {{ $journey->difficulty ?? "Not Set" }}</span>
+                <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
+                <span>Posted at {{ $journey->created_at->format('d/m/Y H:i') }}</span><br>
+                <span>Posted by </span><a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a><br>
+                <span>C: {{ $journey->comments->count() }}</span>
+                <span>L: x</span>
+                <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique(['user_id', 'journey_id'])->count() }}</span>
+            </div>
             @endforeach
         </div>
         <div class="mt-10">
