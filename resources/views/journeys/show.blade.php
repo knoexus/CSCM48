@@ -1,5 +1,12 @@
 @extends('layouts.app')
 
+@section('scripts')
+    <script>
+        var xcomments = @json($comments);
+        var xjourney = @json($journey);
+    </script>
+@endsection
+
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/user.css') }}">   
     <link rel="stylesheet" href="{{ asset('css/journey.css') }}">
@@ -24,39 +31,6 @@
             @endif
         @endif
     </div>
-    <div class="comments mt-5">
-        <h4>Comments</h4>
-        <form method="POST" action="{{ route('comments.store', [$journey->user->id,  $journey->id]) }}">
-            @csrf
-            <div class="form-group mt-3">
-                <label>New comment:</label>
-                <textarea name="body" class="form-control" rows="2" placeholder="Comment"></textarea>
-                @if ($errors->has('body'))
-                    <span class="text-danger">{{ $errors->first('body') }}</span>
-                @endif
-            </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
-        <form>
-        <div>
-            @if($journey->comments->count() == 0)
-                <span>No comments</span>
-            @endif
-            @foreach($comments->sortByDesc('created_at') as $comment)
-                <div class="col-sm-2 col-xl-2 border">
-                    <span>{{ $comment->body }}</span><br>
-                    <span>Created at {{ $comment->created_at->format('d/m/Y H:i') }}</span>
-                    <span>Posted by <a class="user-username" href="/users/{{ $comment->user->id }}">{{ $comment->user->user_name }}</a></span>
-                    @if (Auth::user())
-                        @if (Auth::user()->id == $comment->user->id)
-                            <a class="btn btn-outline-info" href="#" role="button">Edit comment</a>
-                        @endif
-                    @endif
-                </div>
-            @endforeach
-        </div>
-        <div class="mt-10">
-            {!! $comments->render() !!}
-        </div>
-    </div> 
+    <div class="comments mt-5"></div> 
 </div>
 @endsection

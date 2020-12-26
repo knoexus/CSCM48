@@ -120,7 +120,7 @@ class JourneyController extends Controller
             }
         } 
 
-        $comments = $journey->comments()->paginate(5);
+        $comments = $journey->comments()->with('user')->get();
 
         return view('journeys.show', compact('journey', 'comments', 'like'));
     }
