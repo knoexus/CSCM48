@@ -20,6 +20,7 @@ class CommentController extends Controller
                 return response(500);
             }
         }
+        else abort(404);
     }
 
     public function destroy(Request $req, $id, $journey_id, $comment_id) {
