@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 
-export default function Comments({data, journey}) {
+export default function Comments({data, journey, uId}) {
     const hardLimit = 5;
     const [uData, changeUData] = useState(data);
     const [noFetch, changeNoFetch] = useState(data.length < hardLimit);
@@ -45,6 +45,18 @@ export default function Comments({data, journey}) {
             .catch(err => console.error(err));
     }
 
+    const deleteComment = (e, cId) => {
+        e.preventDefault();
+        axios
+            .delete(`/users/${journey.user_id}/journeys/${journey.id}/comments/${cId}`)
+            .then(res => {
+                console.log(res);
+                // remove from comments
+                changeUData([...uData].filter(el => el.id !== cId));
+            })
+            .catch(err => console.error(err));
+    }
+
     return (
         <Fragment>
             <h4>Comments</h4>
@@ -70,11 +82,7 @@ export default function Comments({data, journey}) {
                                         <span>{ comment.body }</span>
                                         <span>Created at { comment.created_at }</span>
                                         <span>Posted by <a className="user-username" href={`/users/${comment.user.id}`}>{ comment.user.user_name }</a></span>
-                                        {/* @if (Auth::user())
-                                            @if (Auth::user()->id == $comment->user->id)
-                                                <a className="btn btn-outline-info" href="#" role="button">Edit comment</a>
-                                            @endif
-                                        @endif */}
+                                        { (comment.user.id == uId) && <button onClick={e => deleteComment(e, comment.id)} type="button" className="btn btn-danger" role="button">X</button> }
                                     </div>
                                 )
                             }
@@ -89,7 +97,8 @@ export default function Comments({data, journey}) {
 
 
 const comments = document.querySelector('.comments');
+const uId = document.querySelector("meta[name='user-id']").getAttribute('content');
 // const data = JSON.parse(comments.dataset.comments);
 const data = xcomments;
 const journey = xjourney;
-ReactDOM.render(<Comments data={data} journey={journey}/>, comments);
+ReactDOM.render(<Comments data={data} journey={journey} uId={uId}/>, comments);

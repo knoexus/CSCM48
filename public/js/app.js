@@ -51406,7 +51406,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function Comments(_ref) {
   var data = _ref.data,
-      journey = _ref.journey;
+      journey = _ref.journey,
+      uId = _ref.uId;
   var hardLimit = 5;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data),
@@ -51461,6 +51462,21 @@ function Comments(_ref) {
     });
   };
 
+  var deleteComment = function deleteComment(e, cId) {
+    e.preventDefault();
+    axios["delete"]("/users/".concat(journey.user_id, "/journeys/").concat(journey.id, "/comments/").concat(cId)).then(function (res) {
+      var _res$data;
+
+      console.log((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.msg); // remove from comments
+
+      changeUData(_toConsumableArray(uData).filter(function (el) {
+        return el.id !== cId;
+      }));
+    })["catch"](function (err) {
+      return console.error(err);
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: function onSubmit(e) {
       return submitForm(e);
@@ -51485,20 +51501,29 @@ function Comments(_ref) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, comment.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Created at ", comment.created_at), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Posted by ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       className: "user-username",
       href: "/users/".concat(comment.user.id)
-    }, comment.user.user_name)));
+    }, comment.user.user_name)), comment.user.id == uId && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      onClick: function onClick(e) {
+        return deleteComment(e, comment.id);
+      },
+      type: "button",
+      className: "btn btn-danger",
+      role: "button"
+    }, "X"));
   })), !noFetch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     onClick: function onClick() {
       return fetchNext();
     }
   }, "Fetch next 5 comments")));
 }
-var comments = document.querySelector('.comments'); // const data = JSON.parse(comments.dataset.comments);
+var comments = document.querySelector('.comments');
+var uId = document.querySelector("meta[name='user-id']").getAttribute('content'); // const data = JSON.parse(comments.dataset.comments);
 
 var data = xcomments;
 var journey = xjourney;
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comments, {
   data: data,
-  journey: journey
+  journey: journey,
+  uId: uId
 }), comments);
 
 /***/ }),

@@ -11,7 +11,7 @@ class CommentController extends Controller
             $startId = $req->query('startId');
             $take = $req->query('take');
             $comments = \App\Models\Comment::where('journey_id', 1)->orderBy('created_at', 'desc')->where('id', '<', (int)$startId)->limit((int)$take)->with('user')->get();
-            if (true) {
+            if ($comments) {
                 return response()->json([
                     'comments' => $comments
                 ]);
@@ -19,6 +19,29 @@ class CommentController extends Controller
             else {
                 return response(500);
             }
+        }
+    }
+
+    public function destroy(Request $req, $id, $journey_id, $comment_id) {
+        $comment = \App\Models\Comment::where([
+            ['journey_id', $journey_id],
+            ['user_id', $id],
+            ['id', $comment_id],
+        ])->first();
+        
+        if ($comment) {
+            if (auth()->id() == $comment->user_id) {
+                $comment->delete();
+                return response()->json([
+                    'msg' => 'Comment successfully deleted!',
+                ]); 
+            }
+            else {
+                return response(401);
+            }
+        }
+        else {
+            return response(500);
         }
     }
 

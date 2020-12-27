@@ -29,6 +29,7 @@ Route::get('/users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyCon
 
 Route::get('/users/{id}/journeys/{journey_id}/comments', 'App\Http\Controllers\CommentController@index')->name('comments.index');
 Route::post('/users/{id}/journeys/{journey_id}/comments', 'App\Http\Controllers\CommentController@store')->name('comments.store')->middleware('auth');
+Route::delete('/users/{id}/journeys/{journey_id}/comments/{comment_id}', 'App\Http\Controllers\CommentController@destroy')->name('comments.destroy')->middleware('auth');
 
 Route::post('/users/{id}/journeys/{journey_id}/likes', 'App\Http\Controllers\LikeController@store')->name('likes.store')->middleware('auth');
 Route::delete('/users/{id}/journeys/{journey_id}/likes/{like_id}', 'App\Http\Controllers\LikeController@destroy')->name('likes.destroy')->middleware('auth');
