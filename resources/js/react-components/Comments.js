@@ -59,7 +59,7 @@ export default function Comments({data, journey, uId}) {
 
     return (
         <Fragment>
-            <h4>Comments</h4>
+            <h4>Comments {`(${uData.length})`}</h4>
             <form onSubmit={e => submitForm(e)}>
                 <div className="form-group mt-3">
                     <label>New comment:</label>

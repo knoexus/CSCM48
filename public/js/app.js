@@ -51465,9 +51465,7 @@ function Comments(_ref) {
   var deleteComment = function deleteComment(e, cId) {
     e.preventDefault();
     axios["delete"]("/users/".concat(journey.user_id, "/journeys/").concat(journey.id, "/comments/").concat(cId)).then(function (res) {
-      var _res$data;
-
-      console.log((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.msg); // remove from comments
+      console.log(res); // remove from comments
 
       changeUData(_toConsumableArray(uData).filter(function (el) {
         return el.id !== cId;
@@ -51477,7 +51475,7 @@ function Comments(_ref) {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Comments"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Comments ", "(".concat(uData.length, ")")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: function onSubmit(e) {
       return submitForm(e);
     }
