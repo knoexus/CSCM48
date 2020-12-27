@@ -51407,16 +51407,22 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Comments(_ref) {
   var data = _ref.data,
       journey = _ref.journey;
+  var hardLimit = 5;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data),
       _useState2 = _slicedToArray(_useState, 2),
       uData = _useState2[0],
       changeUData = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data.length < hardLimit),
       _useState4 = _slicedToArray(_useState3, 2),
-      commentValue = _useState4[0],
-      changeCommentValue = _useState4[1];
+      noFetch = _useState4[0],
+      changeNoFetch = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+      _useState6 = _slicedToArray(_useState5, 2),
+      commentValue = _useState6[0],
+      changeCommentValue = _useState6[1];
 
   var submitForm = function submitForm(e) {
     e.preventDefault();
@@ -51424,7 +51430,6 @@ function Comments(_ref) {
     axios.post("/users/".concat(journey.user_id, "/journeys/").concat(journey.id, "/comments"), {
       body: commentValue
     }).then(function (res) {
-      console.log(res);
       changeUData(function () {
         var obj = _objectSpread(_objectSpread({}, res.data.comment), {}, {
           user: _objectSpread({}, res.data.user)
@@ -51432,6 +51437,25 @@ function Comments(_ref) {
 
         return [obj].concat(_toConsumableArray(uData));
       });
+    })["catch"](function (err) {
+      return console.error(err);
+    });
+  };
+
+  var fetchNext = function fetchNext() {
+    axios.get("/users/".concat(journey.user_id, "/journeys/").concat(journey.id, "/comments"), {
+      params: {
+        startId: uData[uData.length - 1].id,
+        take: hardLimit
+      }
+    }).then(function (res) {
+      var comments = res.data.comments;
+
+      if (comments.length < hardLimit) {
+        changeNoFetch(true);
+      }
+
+      changeUData([].concat(_toConsumableArray(uData), _toConsumableArray(res.data.comments)));
     })["catch"](function (err) {
       return console.error(err);
     });
@@ -51462,13 +51486,16 @@ function Comments(_ref) {
       className: "user-username",
       href: "/users/".concat(comment.user.id)
     }, comment.user.user_name)));
-  }))));
+  })), !noFetch && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    onClick: function onClick() {
+      return fetchNext();
+    }
+  }, "Fetch next 5 comments")));
 }
 var comments = document.querySelector('.comments'); // const data = JSON.parse(comments.dataset.comments);
 
 var data = xcomments;
-var journey = xjourney; // const csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
+var journey = xjourney;
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comments, {
   data: data,
   journey: journey

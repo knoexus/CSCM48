@@ -27,6 +27,7 @@ Route::get('/users/{id}/journeys/{journey_id}/edit', 'App\Http\Controllers\Journ
 Route::put('/users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyController@update')->name('journeys.update')->middleware('auth');
 Route::get('/users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyController@show')->name('journeys.show');
 
+Route::get('/users/{id}/journeys/{journey_id}/comments', 'App\Http\Controllers\CommentController@index')->name('comments.index');
 Route::post('/users/{id}/journeys/{journey_id}/comments', 'App\Http\Controllers\CommentController@store')->name('comments.store')->middleware('auth');
 
 Route::post('/users/{id}/journeys/{journey_id}/likes', 'App\Http\Controllers\LikeController@store')->name('likes.store')->middleware('auth');

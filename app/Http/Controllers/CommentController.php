@@ -6,6 +6,22 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
+    public function index(Request $req, $id, $journey_id) {
+        if ($req->ajax()) {
+            $startId = $req->query('startId');
+            $take = $req->query('take');
+            $comments = \App\Models\Comment::where('journey_id', 1)->orderBy('created_at', 'desc')->where('id', '<', (int)$startId)->limit((int)$take)->with('user')->get();
+            if (true) {
+                return response()->json([
+                    'comments' => $comments
+                ]);
+            }
+            else {
+                return response(500);
+            }
+        }
+    }
+
     public function store(Request $req, $id, $journey_id) {
         if ($req->ajax()) {
             $comment = \App\Models\Comment::create([

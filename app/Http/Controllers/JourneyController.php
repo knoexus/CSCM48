@@ -120,7 +120,7 @@ class JourneyController extends Controller
             }
         } 
 
-        $comments = $journey->comments()->with('user')->get();
+        $comments = $journey->comments()->orderBy('created_at', 'desc')->take(5)->with('user')->get();
 
         return view('journeys.show', compact('journey', 'comments', 'like'));
     }
