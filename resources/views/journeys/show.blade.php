@@ -14,6 +14,9 @@
 
 @section('content')
 <div>
+<div class="sm:flex">
+                    <div class="notifications dropdown"></div>
+                </div>
     <div class="journey-journey-full mt-3 d-flex flex-column">
         <h4>{{ $journey->title }}</h4>
         <img src="/storage/{{ $journey->image }}" height="100" width="100">

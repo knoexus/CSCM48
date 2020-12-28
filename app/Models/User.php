@@ -52,9 +52,4 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Journey');
     }
-
-    public function notifications()
-    {
-        return $this->hasMany('App\Models\Notification', 'recipient_id');
-    }
 }

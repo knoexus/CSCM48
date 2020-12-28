@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Notifications\JourneyLiked;
 
 class LikeController extends Controller
 {
@@ -11,6 +12,9 @@ class LikeController extends Controller
             'user_id' => auth()->id(),
             'journey_id' => $journey_id
         ]);
+
+        $user = \App\Models\User::find($id);
+        $user->notify(new JourneyLiked(auth()->user()));
 
         return response()->json([
             'success' => '200',

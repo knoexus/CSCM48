@@ -57,4 +57,9 @@ class UserController extends Controller
 
         return redirect('/');
     }
+
+    public function notifications()
+    {
+        return auth()->user()->notifications()->get()->toArray();
+    }
 }

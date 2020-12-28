@@ -18,6 +18,15 @@
                 </div>
             </div>
 
+            <!-- Notifications -->
+            @if (Auth::user())
+            <div class="flex">
+                <div class="sm:flex">
+                    <div class="notifications dropdown"></div>
+                </div>
+            </div>
+            @endif
+
             <!-- Settings Dropdown -->
             @if (Auth::user())
             <div class="hidden sm:flex sm:items-center sm:ml-6">
