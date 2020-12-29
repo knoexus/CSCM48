@@ -15,9 +15,8 @@ class LikeController extends Controller
         
         if (auth()->id() != $id) {
             $user = \App\Models\User::find($id);
-            $journey = \App\Models\Journey::find($journey_id);
-            if ($user && $journey) {
-                $user->notify(new JourneyLiked(auth()->user(), $journey));
+            if ($user) {
+                $user->notify(new JourneyLiked(auth()->user(), $journey_id));
             }
         }
 

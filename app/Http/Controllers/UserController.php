@@ -9,7 +9,6 @@ class UserController extends Controller
     public function show($id) 
     {
         $user = \App\Models\User::findOrFail($id);
-        dd(auth()->user()->unreadNotifications);
         $journeys = $user->journeys()->paginate(5);
         return view('users.show', compact('user', 'journeys'));
     }
@@ -61,7 +60,7 @@ class UserController extends Controller
 
     public function unreadNotifications()
     {
-        return auth()->user()->unreadNotifications()->get()->toArray();
+        return auth()->user()->unreadNotifications()->orderBy('created_at', 'desc')->get()->toArray();
     }
 
     public function readAllNotifications()

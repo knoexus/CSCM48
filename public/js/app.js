@@ -57818,7 +57818,8 @@ var Notifications = /*#__PURE__*/function (_Component) {
     _this.state = {
       notifications: [],
       NOTIFICATION_TYPES: {
-        journeyLiked: 'App\\Notifications\\JourneyLiked'
+        journeyLiked: 'App\\Notifications\\JourneyLiked',
+        journeyCommented: 'App\\Notifications\\JourneyCommented'
       }
     };
     _this.markAllAsRead = _this.markAllAsRead.bind(_assertThisInitialized(_this));
@@ -57835,7 +57836,6 @@ var Notifications = /*#__PURE__*/function (_Component) {
           notifications: res.data
         }));
       }).then(function () {
-        console.log(_this2.state.notifications);
         var echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__["default"]({
           broadcaster: 'pusher',
           key: "d894cbcf3eef1a2e6df8",
@@ -57845,8 +57845,6 @@ var Notifications = /*#__PURE__*/function (_Component) {
 
         if (uId) {
           echo["private"]("App.Models.User.".concat(uId)).notification(function (notification) {
-            console.log(notification, _this2.state.notifications);
-
             _this2.setState(_objectSpread(_objectSpread({}, _this2.state), {}, {
               notifications: [notification].concat(_toConsumableArray(_this2.state.notifications))
             }));
@@ -57877,6 +57875,7 @@ var Notifications = /*#__PURE__*/function (_Component) {
       var _this$state = this.state,
           notifications = _this$state.notifications,
           NOTIFICATION_TYPES = _this$state.NOTIFICATION_TYPES;
+      var uId = this.props.uId;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         className: "btn btn-secondary dropdown-toggle",
         type: "button",
@@ -57897,12 +57896,15 @@ var Notifications = /*#__PURE__*/function (_Component) {
         className: "btn btn-danger",
         type: "button"
       }, "Mark all as read"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, notifications.map(function (e) {
-        return e.type == NOTIFICATION_TYPES.journeyLiked && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: e.id
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        }, e.type == NOTIFICATION_TYPES.journeyLiked && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           className: "dropdown-item",
-          href: "#"
-        }, e.data.sender_user_name, " liked your journey"));
+          href: "/users/".concat(uId, "/journeys/").concat(e.data.journey_id)
+        }, e.data.sender_user_name, " liked your journey"), e.type == NOTIFICATION_TYPES.journeyCommented && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          className: "dropdown-item",
+          href: "/users/".concat(uId, "/journeys/").concat(e.data.journey_id)
+        }, e.data.sender_user_name, " left a comment on your journey"));
       })))));
     }
   }]);

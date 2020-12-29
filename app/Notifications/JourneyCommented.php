@@ -7,7 +7,7 @@ use App\Notifications\JourneyNotification;
 use App\Models\User;
 use App\Models\Journey;
 
-class JourneyLiked extends JourneyNotification
+class JourneyCommented extends JourneyNotification
 {
     /**
      * Create a new notification instance.

@@ -12,7 +12,8 @@ export default class Notifications extends Component {
         this.state = {
             notifications: [],
             NOTIFICATION_TYPES: {
-                journeyLiked: 'App\\Notifications\\JourneyLiked'
+                journeyLiked: 'App\\Notifications\\JourneyLiked',
+                journeyCommented: 'App\\Notifications\\JourneyCommented',
             }
         };
         this.markAllAsRead = this.markAllAsRead.bind(this);
@@ -28,7 +29,6 @@ export default class Notifications extends Component {
                 });
             })
             .then(() => {
-                console.log(this.state.notifications);
                 const echo = new Echo({
                     broadcaster: 'pusher',
                     key: process.env.MIX_PUSHER_APP_KEY,
@@ -39,7 +39,6 @@ export default class Notifications extends Component {
                 if(uId) {
                     echo.private(`App.Models.User.${uId}`)
                         .notification(notification => {
-                            console.log(notification, this.state.notifications);
                             this.setState({
                                 ...this.state,
                                 notifications: [notification, ...this.state.notifications]
@@ -63,7 +62,8 @@ export default class Notifications extends Component {
     }
 
     render() {
-        const { notifications, NOTIFICATION_TYPES } = this.state
+        const { notifications, NOTIFICATION_TYPES } = this.state;
+        const { uId } = this.props;
         return (
             <Fragment>
                 <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -77,9 +77,14 @@ export default class Notifications extends Component {
                             <Fragment>
                                 {
                                     notifications.map(e => 
-                                            e.type == NOTIFICATION_TYPES.journeyLiked && 
                                             <div key={e.id}>
-                                                <a className="dropdown-item" href="#">{ e.data.sender_user_name } liked your journey</a>
+                                                { e.type == NOTIFICATION_TYPES.journeyLiked && 
+                                                    <a className="dropdown-item" href={`/users/${uId}/journeys/${e.data.journey_id}`}>{ e.data.sender_user_name } liked your journey</a>
+                                                }
+
+                                                { e.type == NOTIFICATION_TYPES.journeyCommented && 
+                                                    <a className="dropdown-item" href={`/users/${uId}/journeys/${e.data.journey_id}`}>{ e.data.sender_user_name } left a comment on your journey</a>
+                                                }
                                             </div>          
                                     )
                                 }

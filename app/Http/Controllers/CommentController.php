@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use \App\Notifications\JourneyCommented;
 
 class CommentController extends Controller
 {
@@ -55,6 +56,13 @@ class CommentController extends Controller
             ]);
 
             if ($comment) {
+                if (auth()->id() != $id) {
+                    $user = \App\Models\User::find($id);
+                    if ($user) {
+                        $user->notify(new JourneyCommented(auth()->user(), $journey_id));
+                    }
+                }
+                
                 return response()->json([
                     'comment' => $comment,
                     'user' => $comment->user
