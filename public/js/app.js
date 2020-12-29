@@ -57465,48 +57465,6 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-/**
- * Echo exposes an expressive API for subscribing to channels and listening
- * for events that are broadcast by Laravel. Echo and event broadcasting
- * allows your team to easily build robust real-time web applications.
- */
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
-// $(document).ready(function() {
-//     const uId = document.querySelector("meta[name='user-id']").getAttribute('content');
-//     console.log(uId);
-//     if(uId) {
-//         window.Echo.private(`App.Models.User.${uId}`)
-//             .notification(notification => {
-//                 console.log(notification);
-//             });
-//     }
-// });
-// import Echo from 'laravel-echo';
-// window.Pusher = require('pusher-js');
-// window.Echo = new Echo({
-//     broadcaster: 'pusher',
-//     key: process.env.MIX_PUSHER_APP_KEY,
-//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
-//     forceTLS: true
-// });
-// $(document).ready(function() {
-//     var uId = document.querySelector("meta[name='user-id']").getAttribute('content');
-//     if(uId) {
-//         console.log(uId);
-//         var channel = window.Echo.private(`ntf_journeys.${uId}`);
-//         console.log(channel);
-//         channel.listen('JourneyLiked', function(data) {
-//             console.log(data, JSON.stringify(data));
-//         });
-//     }
-// });
 
 /***/ }),
 
