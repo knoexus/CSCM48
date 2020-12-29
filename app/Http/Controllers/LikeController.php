@@ -15,6 +15,7 @@ class LikeController extends Controller
 
         $user = \App\Models\User::find($id);
         $user->notify(new JourneyLiked(auth()->user()));
+        // broadcast(new \App\Events\JourneyLiked;($user, auth()->user(), "hi world"));
 
         return response()->json([
             'success' => '200',

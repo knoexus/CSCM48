@@ -26,3 +26,37 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+// $(document).ready(function() {
+//     const uId = document.querySelector("meta[name='user-id']").getAttribute('content');
+//     console.log(uId);
+//     if(uId) {
+//         window.Echo.private(`App.Models.User.${uId}`)
+//             .notification(notification => {
+//                 console.log(notification);
+//             });
+//     }
+// });
+
+
+// import Echo from 'laravel-echo';
+// window.Pusher = require('pusher-js');
+
+// window.Echo = new Echo({
+//     broadcaster: 'pusher',
+//     key: process.env.MIX_PUSHER_APP_KEY,
+//     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
+//     forceTLS: true
+// });
+
+// $(document).ready(function() {
+//     var uId = document.querySelector("meta[name='user-id']").getAttribute('content');
+//     if(uId) {
+//         console.log(uId);
+//         var channel = window.Echo.private(`ntf_journeys.${uId}`);
+//         console.log(channel);
+//         channel.listen('JourneyLiked', function(data) {
+//             console.log(data, JSON.stringify(data));
+//         });
+//     }
+// });
