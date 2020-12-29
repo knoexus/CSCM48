@@ -12,10 +12,14 @@ class LikeController extends Controller
             'user_id' => auth()->id(),
             'journey_id' => $journey_id
         ]);
-
-        $user = \App\Models\User::find($id);
-        $user->notify(new JourneyLiked(auth()->user()));
-        // broadcast(new \App\Events\JourneyLiked;($user, auth()->user(), "hi world"));
+        
+        if (auth()->id() != $id) {
+            $user = \App\Models\User::find($id);
+            $journey = \App\Models\Journey::find($journey_id);
+            if ($user && $journey) {
+                $user->notify(new JourneyLiked(auth()->user(), $journey));
+            }
+        }
 
         return response()->json([
             'success' => '200',

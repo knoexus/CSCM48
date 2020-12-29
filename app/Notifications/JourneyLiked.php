@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
 use App\Models\User;
+use App\Models\Journey;
 
 class JourneyLiked extends Notification implements ShouldBroadcast
 {
@@ -19,9 +20,10 @@ class JourneyLiked extends Notification implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $sender)
+    public function __construct(User $sender, Journey $journey)
     {
         $this->sender = $sender;
+        $this->journey = $journey;
     }
 
     /**
@@ -49,6 +51,7 @@ class JourneyLiked extends Notification implements ShouldBroadcast
             'data' => [
                 'sender_id' => $this->sender->id,
                 'sender_user_name' => $this->sender->user_name,
+                'journey_id' => $this->journey->id,
             ],
         ];
     }
@@ -64,6 +67,7 @@ class JourneyLiked extends Notification implements ShouldBroadcast
         return [
             'sender_id' => $this->sender->id,
             'sender_user_name' => $this->sender->user_name,
+            'journey_id' => $this->journey->id,
         ];
     }
 }

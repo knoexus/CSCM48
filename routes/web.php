@@ -20,7 +20,8 @@ Route::get('/', function () {
 Route::get('/users/{id}', 'App\Http\Controllers\UserController@show')->name('users.show');
 Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit')->middleware('auth');
 Route::post('/users/{id}', 'App\Http\Controllers\UserController@update')->name('users.update')->middleware('auth'); // create or update
-Route::get('/notifications', 'App\Http\Controllers\UserController@notifications')->name('users.notifications')->middleware('auth');
+Route::get('/unreadNotifications', 'App\Http\Controllers\UserController@unreadNotifications')->name('users.unreadNotifications')->middleware('auth');
+Route::put('/notifications/readAll', 'App\Http\Controllers\UserController@readAllNotifications')->name('users.readAllNotifications')->middleware('auth');
 
 Route::get('/users/{id}/journeys/create', 'App\Http\Controllers\JourneyController@create')->name('journeys.create')->middleware('auth');
 Route::post('/users/{id}/journeys', 'App\Http\Controllers\JourneyController@store')->name('journeys.store')->middleware('auth');

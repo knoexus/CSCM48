@@ -15,11 +15,12 @@ export default class Notifications extends Component {
                 journeyLiked: 'App\\Notifications\\JourneyLiked'
             }
         };
+        this.markAllAsRead = this.markAllAsRead.bind(this);
     }
 
     componentDidMount() {
         axios
-            .get('/notifications')
+            .get('/unreadNotifications')
             .then(res => {
                 this.setState({
                     ...this.state,
@@ -27,6 +28,7 @@ export default class Notifications extends Component {
                 });
             })
             .then(() => {
+                console.log(this.state.notifications);
                 const echo = new Echo({
                     broadcaster: 'pusher',
                     key: process.env.MIX_PUSHER_APP_KEY,
@@ -48,6 +50,17 @@ export default class Notifications extends Component {
             .catch(err => console.error(err));
     }
 
+    markAllAsRead() {
+        axios
+            .put('/notifications/readAll')
+            .then(() => {
+                this.setState({
+                    ...this.state,
+                    notifications: []
+                })
+            })
+            .catch(err => console.error(err));
+    }
 
     render() {
         const { notifications, NOTIFICATION_TYPES } = this.state
@@ -60,14 +73,17 @@ export default class Notifications extends Component {
                     { notifications.length == 0 && <a className="dropdown-item" href="#">No new notifications</a> }
                     { notifications.length > 0 && 
                         <Fragment>
-                            {
-                                notifications.map(e => 
-                                        e.type == NOTIFICATION_TYPES.journeyLiked && 
-                                        <div key={e.id}>
-                                            <a className="dropdown-item" href="#">{ e.data.sender_user_name } liked your journey</a>
-                                        </div>          
-                                )
-                            }
+                            <button onClick={() => this.markAllAsRead()} className="btn btn-danger" type="button">Mark all as read</button>
+                            <Fragment>
+                                {
+                                    notifications.map(e => 
+                                            e.type == NOTIFICATION_TYPES.journeyLiked && 
+                                            <div key={e.id}>
+                                                <a className="dropdown-item" href="#">{ e.data.sender_user_name } liked your journey</a>
+                                            </div>          
+                                    )
+                                }
+                            </Fragment>
                         </Fragment>
                     } 
                 </div> 

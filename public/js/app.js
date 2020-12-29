@@ -57821,6 +57821,7 @@ var Notifications = /*#__PURE__*/function (_Component) {
         journeyLiked: 'App\\Notifications\\JourneyLiked'
       }
     };
+    _this.markAllAsRead = _this.markAllAsRead.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -57829,11 +57830,12 @@ var Notifications = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/notifications').then(function (res) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/unreadNotifications').then(function (res) {
         _this2.setState(_objectSpread(_objectSpread({}, _this2.state), {}, {
           notifications: res.data
         }));
       }).then(function () {
+        console.log(_this2.state.notifications);
         var echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_3__["default"]({
           broadcaster: 'pusher',
           key: "d894cbcf3eef1a2e6df8",
@@ -57855,8 +57857,23 @@ var Notifications = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "markAllAsRead",
+    value: function markAllAsRead() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.put('/notifications/readAll').then(function () {
+        _this3.setState(_objectSpread(_objectSpread({}, _this3.state), {}, {
+          notifications: []
+        }));
+      })["catch"](function (err) {
+        return console.error(err);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this4 = this;
+
       var _this$state = this.state,
           notifications = _this$state.notifications,
           NOTIFICATION_TYPES = _this$state.NOTIFICATION_TYPES;
@@ -57873,14 +57890,20 @@ var Notifications = /*#__PURE__*/function (_Component) {
       }, notifications.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         className: "dropdown-item",
         href: "#"
-      }, "No new notifications"), notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, notifications.map(function (e) {
+      }, "No new notifications"), notifications.length > 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: function onClick() {
+          return _this4.markAllAsRead();
+        },
+        className: "btn btn-danger",
+        type: "button"
+      }, "Mark all as read"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, notifications.map(function (e) {
         return e.type == NOTIFICATION_TYPES.journeyLiked && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           key: e.id
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           className: "dropdown-item",
           href: "#"
         }, e.data.sender_user_name, " liked your journey"));
-      }))));
+      })))));
     }
   }]);
 
