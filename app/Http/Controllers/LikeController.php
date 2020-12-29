@@ -26,7 +26,7 @@ class LikeController extends Controller
     public function destroy($id, $journey_id, $like_id) {
         $like = \App\Models\Like::where([
             ['id', $like_id],
-            ['user_id', $id],
+            ['user_id', auth()->id()],
             ['journey_id', $journey_id],
         ])->first()->delete();
 
