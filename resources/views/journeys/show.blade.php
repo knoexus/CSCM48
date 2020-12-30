@@ -3,6 +3,7 @@
 @section('scripts')
     <script>
         var xcomments = @json($comments);
+        var xadmin = @json(auth()->user()->isAdmin());
         var xjourney = @json($journey);
     </script>
 @endsection
@@ -14,9 +15,15 @@
 
 @section('content')
 <div>
-<div class="sm:flex">
-                    <div class="notifications dropdown"></div>
-                </div>
+    @if (Auth::user()->isAdmin() && (Auth::user()->id != $journey->user->id))
+    <div class="d-flex">
+        <form method="POST" action="{{ route('journeys.destroy', [$journey->user->id, $journey->id]) }}">
+            @method('DELETE')
+            @csrf
+            <button class="btn btn-info" type="submit">Delete Journey</button>
+        </form>
+    </div>
+    @endif
     <div class="journey-journey-full mt-3 d-flex flex-column">
         <h4>{{ $journey->title }}</h4>
         <img src="/storage/{{ $journey->image }}" height="100" width="100">
@@ -29,7 +36,12 @@
         <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique('user_id')->count() }}</span>
         @if (Auth::user())
             @if (Auth::user()->id == $journey->user->id)
-                <a class="btn btn-outline-info" href="/users/{{ $journey->user->id }}/journeys/{{ $journey->id }}/edit" role="button">Edit post</a>
+                <a class="btn btn-outline-info" href="/users/{{ $journey->user->id }}/journeys/{{ $journey->id }}/edit" role="button">Edit</a>
+                <form method="POST" action="{{ route('journeys.destroy', [$journey->user->id, $journey->id]) }}">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-info" type="submit">Delete</button>
+                </form>
             @endif
         @endif
     </div>

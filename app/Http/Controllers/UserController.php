@@ -58,6 +58,18 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    public function destroy($id) 
+    {
+        $current_user = auth()->user();
+        if ($current_user->isAdmin() || $current_user->id == $id) {
+            $user = \App\Models\User::findOrFail($id);
+            if ($user) {
+                $user->delete();
+            }
+        }
+        return redirect('/');
+    }
+
     public function unreadNotifications()
     {
         return auth()->user()->unreadNotifications()->orderBy('created_at', 'desc')->get()->toArray();

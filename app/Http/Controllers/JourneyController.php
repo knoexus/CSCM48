@@ -124,4 +124,20 @@ class JourneyController extends Controller
 
         return view('journeys.show', compact('journey', 'comments', 'like'));
     }
+
+    public function destroy($id, $journey_id) 
+    {
+        $current_user = auth()->user();
+        if ($current_user->isAdmin() || $current_user->id == $id) {
+            $journey = \App\Models\Journey::where([
+                ['id', $journey_id],
+                ['user_id', $id]
+            ])->firstOrFail();
+
+            if ($journey) {
+                $journey->delete();
+            }
+        }
+        return redirect('/users/'.$id);
+    }
 }

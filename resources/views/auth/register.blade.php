@@ -59,6 +59,17 @@
                                 name="password_confirmation" required />
             </div>
 
+            <!-- IsAdmin -->
+            <div class="mt-4">
+                <x-label for="isAdmin" :value="__('Admin')" />
+
+                <x-input id="isAdmin" class="block mt-1"
+                                type="checkbox"
+                                name="isAdmin"
+                                value="false"
+                                />
+            </div>
+
             <div class="flex items-center justify-end mt-4">
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
                     {{ __('Already registered?') }}

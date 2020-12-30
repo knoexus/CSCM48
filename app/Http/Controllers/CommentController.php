@@ -32,7 +32,7 @@ class CommentController extends Controller
         ])->first();
         
         if ($comment) {
-            if (auth()->id() == $comment->user_id) {
+            if (auth()->id() == $comment->user_id || auth()->user()->isAdmin()) {
                 $comment->delete();
                 return response()->json([
                     'msg' => 'Comment successfully deleted!',

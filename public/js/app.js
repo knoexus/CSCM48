@@ -57513,7 +57513,8 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 function Comments(_ref) {
   var data = _ref.data,
       journey = _ref.journey,
-      uId = _ref.uId;
+      uId = _ref.uId,
+      admin = _ref.admin;
   var hardLimit = 5;
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data),
@@ -57605,7 +57606,7 @@ function Comments(_ref) {
     }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, comment.body), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Created at ", comment.created_at), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "Posted by ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
       className: "user-username",
       href: "/users/".concat(comment.user.id)
-    }, comment.user.user_name)), comment.user.id == uId && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+    }, comment.user.user_name)), (comment.user.id == uId || admin) && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
       onClick: function onClick(e) {
         return deleteComment(e, comment.id);
       },
@@ -57624,8 +57625,11 @@ var uId = document.querySelector("meta[name='user-id']").getAttribute('content')
 
 var data = xcomments;
 var journey = xjourney;
+var admin = xadmin;
+console.log(admin);
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comments, {
   data: data,
+  admin: xadmin,
   journey: journey,
   uId: uId
 }), comments);

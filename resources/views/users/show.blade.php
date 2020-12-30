@@ -7,6 +7,15 @@
 
 @section('content')
 <div class="container mt-3">
+    @if (Auth::user()->isAdmin() && Auth::user()->id != $user->id)
+    <div class="d-flex">
+        <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+            @method('DELETE')
+            @csrf
+            <button class="btn btn-info" type="submit">Delete Profile</button>
+        </form>
+    </div>
+    @endif
     <div class="user-main_info">
         <div class="d-flex">
             <div>
@@ -25,12 +34,15 @@
             <div class="ml-4">
                 @if (Auth::user())
                     @if (Auth::user()->id == $user->id)
-                        <a class="btn btn-outline-info" href="/users/{{ Auth::user()->id }}/edit" role="button">Edit profile</a>
+                        @if (!Auth::user()->isAdmin())
+                            <a class="btn btn-outline-info" href="/users/{{ Auth::user()->id }}/edit" role="button">Edit profile</a>
+                        @endif
                     @endif
                 @endif
             </div>
         </div>
     </div>
+    @if (!(($user->id == Auth::user()->id) && Auth::user()->isAdmin()))
     <div class="journeys">
         <h4 class="mt-3">Journeys</h4>
         @if (Auth::user())
@@ -60,6 +72,7 @@
             {!! $journeys->render() !!}
         </div>
     </div>
+    @endif
 </div>
 @endsection
 

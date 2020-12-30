@@ -22,12 +22,14 @@ Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name
 Route::post('/users/{id}', 'App\Http\Controllers\UserController@update')->name('users.update')->middleware('auth'); // create or update
 Route::get('/unreadNotifications', 'App\Http\Controllers\UserController@unreadNotifications')->name('users.unreadNotifications')->middleware('auth');
 Route::put('/notifications/readAll', 'App\Http\Controllers\UserController@readAllNotifications')->name('users.readAllNotifications')->middleware('auth');
+Route::delete('users/{id}', 'App\Http\Controllers\UserController@destroy')->name('users.destroy')->middleware('auth');
 
 Route::get('/users/{id}/journeys/create', 'App\Http\Controllers\JourneyController@create')->name('journeys.create')->middleware('auth');
 Route::post('/users/{id}/journeys', 'App\Http\Controllers\JourneyController@store')->name('journeys.store')->middleware('auth');
 Route::get('/users/{id}/journeys/{journey_id}/edit', 'App\Http\Controllers\JourneyController@edit')->name('journeys.edit')->middleware('auth');
 Route::put('/users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyController@update')->name('journeys.update')->middleware('auth');
 Route::get('/users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyController@show')->name('journeys.show');
+Route::delete('users/{id}/journeys/{journey_id}', 'App\Http\Controllers\JourneyController@destroy')->name('journeys.destroy')->middleware('auth');
 
 Route::get('/users/{id}/journeys/{journey_id}/comments', 'App\Http\Controllers\CommentController@index')->name('comments.index');
 Route::post('/users/{id}/journeys/{journey_id}/comments', 'App\Http\Controllers\CommentController@store')->name('comments.store')->middleware('auth');

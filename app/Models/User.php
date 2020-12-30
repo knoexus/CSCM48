@@ -52,4 +52,14 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Models\Journey');
     }
+
+    public function roles() 
+    {
+        return $this->belongsToMany('App\Models\Role', 'roles_users', 'user_id', 'role_id');
+    }
+
+    public function isAdmin()
+    {
+        return $this->roles()->where('title', 'admin')->exists();
+    }
 }
