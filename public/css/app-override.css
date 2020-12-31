@@ -1,3 +1,91 @@
 .body-inner {
     background-color: #f5f8ff !important;
 }
+
+.app-logo {
+    max-height: 140px;
+}
+
+.app-logo-sm{
+    max-height: 80px;
+}
+
+.auth-bg {
+    background-color: rgba(23, 79, 116, 0.705);
+}
+
+div.auth-links{
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    padding-right:15px;
+}
+
+.auth-link{
+    color: rgb(204, 202, 202) !important;
+    text-decoration: none;
+    margin-right:15px;
+}
+
+.auth-link:hover{
+    color: rgb(167, 165, 165) !important;
+    text-decoration: underline;
+}
+
+.notifications-bell{
+    max-height: 30px;
+}
+
+.notifications{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.notifications-count{
+    color: white;
+}
+
+.notifications-button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 0.5px solid white;
+    border-radius: 0.5rem;
+}
+
+.notifications-button:hover, .notifications-button:active, .notifications-button:focus{
+    background-color: rgba(75, 85, 99, 0.7);
+}
+
+.notifications-button:focus{
+    outline: none;
+}
+
+.notifications-button{
+    padding: 4px;
+}
+
+.dropdown-menu{
+    border-radius: 0.375rem !important;
+    max-height: 300px;
+    overflow-y: scroll;
+}
+
+/* .dropdown-menu, .dropdown-menu:active{
+    transform: translate3d(-136.5px, 10px, 0px) !important;
+} */
+
+.dropdown:hover > .dropdown-menu {
+    display: block !important;
+}
+
+.profile-info:hover {
+    text-decoration: underline;
+}
+
+.profile-info:focus {
+    text-decoration: underline;
+    outline: none;
+}

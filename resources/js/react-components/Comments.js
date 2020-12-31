@@ -99,7 +99,9 @@ export default function Comments({data, journey, uId, admin}) {
 const comments = document.querySelector('.comments');
 const uId = document.querySelector("meta[name='user-id']").getAttribute('content');
 // const data = JSON.parse(comments.dataset.comments);
-const data = xcomments;
-const journey = xjourney;
-const admin = xadmin;
-ReactDOM.render(<Comments data={data} admin={xadmin} journey={journey} uId={uId}/>, comments);
+const data = window.xcomments || null;
+const journey = window.xjourney || null;
+const admin = window.xadmin || null;
+if (comments && data && journey) {
+    ReactDOM.render(<Comments data={data} admin={xadmin} journey={journey} uId={uId}/>, comments);
+}

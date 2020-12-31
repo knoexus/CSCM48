@@ -66,8 +66,9 @@ export default class Notifications extends Component {
         const { uId } = this.props;
         return (
             <Fragment>
-                <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Notifications { `(${notifications.length})` }
+                <button className="notifications-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img className="notifications-bell" src="/images/bell-2-48.png"></img>
+                    <span className="notifications-count">{ `(${notifications.length})` }</span>
                 </button>
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     { notifications.length == 0 && <a className="dropdown-item" href="#">No new notifications</a> }

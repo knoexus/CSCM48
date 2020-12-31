@@ -2,9 +2,9 @@
 
 @section('scripts')
     <script>
-        var xcomments = @json($comments);
-        var xadmin = @json(auth()->user()->isAdmin());
-        var xjourney = @json($journey);
+        window.xcomments = @json($comments);
+        window.xadmin = @json(auth()->user()->isAdmin());
+        window.xjourney = @json($journey);
     </script>
 @endsection
 

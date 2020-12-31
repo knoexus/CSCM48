@@ -57623,16 +57623,18 @@ function Comments(_ref) {
 var comments = document.querySelector('.comments');
 var uId = document.querySelector("meta[name='user-id']").getAttribute('content'); // const data = JSON.parse(comments.dataset.comments);
 
-var data = xcomments;
-var journey = xjourney;
-var admin = xadmin;
-console.log(admin);
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comments, {
-  data: data,
-  admin: xadmin,
-  journey: journey,
-  uId: uId
-}), comments);
+var data = window.xcomments || null;
+var journey = window.xjourney || null;
+var admin = window.xadmin || null;
+
+if (comments && data && journey) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comments, {
+    data: data,
+    admin: xadmin,
+    journey: journey,
+    uId: uId
+  }), comments);
+}
 
 /***/ }),
 
@@ -57881,13 +57883,18 @@ var Notifications = /*#__PURE__*/function (_Component) {
           NOTIFICATION_TYPES = _this$state.NOTIFICATION_TYPES;
       var uId = this.props.uId;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        className: "btn btn-secondary dropdown-toggle",
+        className: "notifications-button",
         type: "button",
         id: "dropdownMenuButton",
         "data-toggle": "dropdown",
         "aria-haspopup": "true",
         "aria-expanded": "false"
-      }, "Notifications ", "(".concat(notifications.length, ")")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        className: "notifications-bell",
+        src: "/images/bell-2-48.png"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        className: "notifications-count"
+      }, "(".concat(notifications.length, ")"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dropdown-menu",
         "aria-labelledby": "dropdownMenuButton"
       }, notifications.length == 0 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {

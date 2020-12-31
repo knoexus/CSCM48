@@ -7,14 +7,16 @@
 
 @section('content')
 <div class="container mt-3">
-    @if (Auth::user()->isAdmin() && Auth::user()->id != $user->id)
-    <div class="d-flex">
-        <form method="POST" action="{{ route('users.destroy', $user->id) }}">
-            @method('DELETE')
-            @csrf
-            <button class="btn btn-info" type="submit">Delete Profile</button>
-        </form>
-    </div>
+    @if (Auth::user())
+        @if (Auth::user()->isAdmin() && Auth::user()->id != $user->id)
+        <div class="d-flex">
+            <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                @method('DELETE')
+                @csrf
+                <button class="btn btn-info" type="submit">Delete Profile</button>
+            </form>
+        </div>
+        @endif
     @endif
     <div class="user-main_info">
         <div class="d-flex">
@@ -42,36 +44,36 @@
             </div>
         </div>
     </div>
-    @if (!(($user->id == Auth::user()->id) && Auth::user()->isAdmin()))
-    <div class="journeys">
-        <h4 class="mt-3">Journeys</h4>
-        @if (Auth::user())
-            @if (Auth::user()->id == $user->id)
-            <div class="mt-4">
-                <a class="btn btn-outline-secondary" href="/users/{{ Auth::user()->id }}/journeys/create" role="button">Share new journey</a>
+    @if (Auth::user())
+        @if (!(($user->id == Auth::user()->id) && Auth::user()->isAdmin()))
+        <div class="journeys">
+            <h4 class="mt-3">Journeys</h4>
+                @if (Auth::user()->id == $user->id)
+                <div class="mt-4">
+                    <a class="btn btn-outline-secondary" href="/users/{{ Auth::user()->id }}/journeys/create" role="button">Share new journey</a>
+                </div>
+                @endif
+            <div>
+                @foreach($journeys->sortByDesc('created_at') as $journey)
+                <div class="journey mt-4" onclick="window.location.href='/users/{{ $user->id }}/journeys/{{ $journey->id }}';">
+                    <h4>{{ $journey->title }}</h4>
+                    <img src="/storage/{{ $journey->image }}" height="100" width="100">
+                    <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
+                    <span>Difficulty: {{ $journey->difficulty ?? "Not Set" }}</span>
+                    <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
+                    <span>Posted at {{ $journey->created_at->format('d/m/Y H:i') }}</span><br>
+                    <span>Posted by </span><a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a><br>
+                    <span>C: {{ $journey->comments->count() }}</span>
+                    <span>L: x</span>
+                    <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique(['user_id', 'journey_id'])->count() }}</span>
+                </div>
+                @endforeach
             </div>
-            @endif
+            <div class="mt-10">
+                {!! $journeys->render() !!}
+            </div>
+        </div>
         @endif
-        <div>
-            @foreach($journeys->sortByDesc('created_at') as $journey)
-            <div class="journey mt-4" onclick="window.location.href='/users/{{ $user->id }}/journeys/{{ $journey->id }}';">
-                <h4>{{ $journey->title }}</h4>
-                <img src="/storage/{{ $journey->image }}" height="100" width="100">
-                <span>Enjoyability: {{ $journey->enjoyability ?? "Not Set" }}</span>
-                <span>Difficulty: {{ $journey->difficulty ?? "Not Set" }}</span>
-                <span>{{ $journey->would_recommend ? "Recommended" : "Not Recommended" }}</span><br>
-                <span>Posted at {{ $journey->created_at->format('d/m/Y H:i') }}</span><br>
-                <span>Posted by </span><a class="user-username" href="/users/{{ $journey->user->id }}">{{ $journey->user->user_name }}</a><br>
-                <span>C: {{ $journey->comments->count() }}</span>
-                <span>L: x</span>
-                <span>V: {{ $journey->views->count() }} | {{ $journey->views->unique(['user_id', 'journey_id'])->count() }}</span>
-            </div>
-            @endforeach
-        </div>
-        <div class="mt-10">
-            {!! $journeys->render() !!}
-        </div>
-    </div>
     @endif
 </div>
 @endsection
