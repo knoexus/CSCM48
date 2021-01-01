@@ -1,30 +1,42 @@
 import React, { Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
+import moment from 'moment';
 
 export default function Comments({data, journey, uId, admin}) {
     const hardLimit = 5;
     const [uData, changeUData] = useState(data);
     const [noFetch, changeNoFetch] = useState(data.length < hardLimit);
     const [commentValue, changeCommentValue] = useState('');
+    const [bodyError, changeBodyError] = useState(null);
     const submitForm = e => {
         e.preventDefault();
-        console.log('ready to submit', commentValue);
+        changeBodyError(null);
         axios
             .post(`/users/${journey.user_id}/journeys/${journey.id}/comments`, {
                 body: commentValue
             })
             .then(res => {
-                changeUData(() => {
-                    const obj = {
-                        ...res.data.comment,
-                        user: {
-                            ...res.data.user
+                if (res.data.errors) {
+                    changeBodyError(res.data.errors[0]);
+                }
+                else {
+                    changeUData(() => {
+                        const obj = {
+                            ...res.data.comment,
+                            user: {
+                                ...res.data.user
+                            }
                         }
-                    }
-                    return [obj, ...uData]
-                })
+                        return [obj, ...uData]
+                    })
+                }
             })
-            .catch(err => console.error(err));
+            .catch(err => {
+                console.error(err);
+                if (err.response.status == 401) {
+                    window.location.href = '/login';
+                }
+            });
     }
 
     const fetchNext = () => {
@@ -64,10 +76,14 @@ export default function Comments({data, journey, uId, admin}) {
                 <div className="form-group mt-3">
                     <label>New comment:</label>
                     <textarea onChange={e => changeCommentValue(e.target.value)} name="body" className="form-control" rows="2" placeholder="Comment"></textarea>
-                    {/* @if ($errors->has('body'))
-                        <span className="text-danger">{{ $errors->first('body') }}</span>
-                    @endif */}
+                    { 
+                        bodyError &&
+                        <div className="mt-3 list-disc list-inside text-sm text-red-600">
+                            <span className="text-danger">{bodyError}</span>
+                        </div>
+                    }
                 </div>
+
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
             <div>
@@ -78,18 +94,24 @@ export default function Comments({data, journey, uId, admin}) {
                         <Fragment>
                             {
                                 uData.map(comment => 
-                                    <div key={comment.id} className="col-sm-2 col-xl-2 border">
-                                        <span>{ comment.body }</span>
-                                        <span>Created at { comment.created_at }</span>
-                                        <span>Posted by <a className="user-username" href={`/users/${comment.user.id}`}>{ comment.user.user_name }</a></span>
-                                        { (comment.user.id == uId || admin) && <button onClick={e => deleteComment(e, comment.id)} type="button" className="btn btn-danger" role="button">X</button> }
+                                    <div key={comment.id} className="mt-4 border journey-full-comment">
+                                        <div className="journey-full-comment-username">
+                                            <a className="user-username" href={`/users/${comment.user.id}`}>{ comment.user.user_name }</a>
+                                        </div>
+                                        <div className="journey-full-comment-body">
+                                            <span>{ comment.body }</span>
+                                        </div>
+                                        <div className="posted posted-comment">
+                                            <span>Created at { moment(comment.created_at).format('DD/MM/YYYY HH:mm') }</span>
+                                        </div>
+                                        { (comment.user.id == uId || admin) && <div className="delete-comment"><button onClick={e => deleteComment(e, comment.id)} type="button" className={`btn btn-${admin ? 'warning' : 'danger'}`} role="button">X</button></div> }
                                     </div>
                                 )
                             }
                         </Fragment>
 
                 }
-                { !noFetch && <button onClick={() => fetchNext()}>Fetch next 5 comments</button> }
+                { !noFetch && <button className="btn btn-outline-secondary mt-5" onClick={() => fetchNext()}>Fetch next 5 comments ...</button> }
             </div>
         </Fragment>
     )

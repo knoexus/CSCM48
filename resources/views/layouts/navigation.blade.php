@@ -21,12 +21,14 @@
                     </x-nav-link>
                     @endif
                 </div>
-
+                
+                @if (Auth::user())
                 <div class="flex items-center flex-shrink-0 ml-4">
                     <div class="flex">
                         <div class="notifications dropdown"></div>
                     </div>
                 </div>
+                @endif
             </div>
 
 

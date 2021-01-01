@@ -10,7 +10,7 @@ export default class Notifications extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            notifications: [],
+            notifications: null,
             NOTIFICATION_TYPES: {
                 journeyLiked: 'App\\Notifications\\JourneyLiked',
                 journeyCommented: 'App\\Notifications\\JourneyCommented',
@@ -41,7 +41,7 @@ export default class Notifications extends Component {
                         .notification(notification => {
                             this.setState({
                                 ...this.state,
-                                notifications: [notification, ...this.state.notifications]
+                                notifications: [notification, ...(this.state.notifications ?? [])]
                             })
                         });
                 }
@@ -68,23 +68,25 @@ export default class Notifications extends Component {
             <Fragment>
                 <button className="notifications-button" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <img className="notifications-bell" src="/images/bell-2-48.png"></img>
-                    <span className="notifications-count">{ `(${notifications.length})` }</span>
+                    { notifications && <span className="notifications-count">{ `(${notifications.length})` }</span> }
                 </button>
+
+                { notifications && 
                 <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     { notifications.length == 0 && <a className="dropdown-item" href="#">No new notifications</a> }
                     { notifications.length > 0 && 
                         <Fragment>
-                            <button onClick={() => this.markAllAsRead()} className="btn btn-danger" type="button">Mark all as read</button>
+                            <button onClick={() => this.markAllAsRead()} className="btn btn-danger notifications-markAllRead" type="button">Mark all as read</button>
                             <Fragment>
                                 {
                                     notifications.map(e => 
                                             <div key={e.id}>
                                                 { e.type == NOTIFICATION_TYPES.journeyLiked && 
-                                                    <a className="dropdown-item" href={`/users/${uId}/journeys/${e.data.journey_id}`}>{ e.data.sender_user_name } liked your journey</a>
+                                                    <a className="dropdown-item" href={`/users/${uId}/journeys/${e.data.journey_id}`}>@{ e.data.sender_user_name } liked your journey</a>
                                                 }
 
                                                 { e.type == NOTIFICATION_TYPES.journeyCommented && 
-                                                    <a className="dropdown-item" href={`/users/${uId}/journeys/${e.data.journey_id}`}>{ e.data.sender_user_name } left a comment on your journey</a>
+                                                    <a className="dropdown-item" href={`/users/${uId}/journeys/${e.data.journey_id}`}>@{ e.data.sender_user_name } left a comment on your journey</a>
                                                 }
                                             </div>          
                                     )
@@ -93,6 +95,7 @@ export default class Notifications extends Component {
                         </Fragment>
                     } 
                 </div> 
+                }
             </Fragment>
         )
     }

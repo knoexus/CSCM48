@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Validator;
 use \App\Notifications\JourneyCommented;
 
 class CommentController extends Controller
@@ -49,6 +50,15 @@ class CommentController extends Controller
 
     public function store(Request $req, $id, $journey_id) {
         if ($req->ajax()) {
+            $validator = Validator::make($req->all(), [
+                'body' => 'required|string|max:255'
+            ]);
+            
+            if ($validator->fails())
+            {
+                return response()->json(['errors'=>$validator->errors()->all()]);
+            }
+
             $comment = \App\Models\Comment::create([
                 'body' => $req->body, 
                 'user_id' => auth()->id(),

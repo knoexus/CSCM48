@@ -13,10 +13,72 @@ a.journey-referrer {
     text-decoration: none; 
 } 
 
+.view{
+    margin-left: 20px;
+    margin-bottom: 2px;
+    display: inline-flex;
+}
+
+.view > span {
+    margin-left: 3px;
+    margin-top: 1px;
+}
+
 .likeGlyph{
     cursor: pointer;
+    display: inline-flex;
+}
+
+.likeGlyph > span{
+    margin-left: 2px;
+    margin-top: 2px;
 }
 
 .likeGlyph-entered, .likeGlyph:hover{
     color: red;
+}
+
+.posted{
+    font-size: 14px;
+    font-weight: lighter;
+    font-style: italic;
+    margin-bottom: 2px;
+}
+
+.journey-full-comment {
+    position: relative;
+    padding: 10px;
+    width: 650px;
+    border-radius: 0.5em;
+}
+
+@media(max-width: 600px) {
+    .journey-full-comment {
+        width: 100%;
+    }
+
+    .posted {
+        margin-right: auto;
+        margin-top: 10px;
+    }
+}
+
+@media(min-width: 600px) {
+    .posted {
+        margin-left: auto;
+    }
+}
+
+.journey-full-comment-body {
+    margin: 10px 0;
+    font-weight: 500;
+    overflow-wrap: break-word;
+    font-size: 18px;
+}
+
+.delete-comment{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    max-height: 20px;
 }

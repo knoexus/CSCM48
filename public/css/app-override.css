@@ -73,6 +73,21 @@ div.auth-links{
     overflow-y: scroll;
 }
 
+.notifications-markAllRead{
+    margin-left: 24px;
+    margin-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+    .dropdown-menu{
+        width: 200px;
+    }
+    
+    .dropdown-item{
+        font-size: 12px;
+    }
+}
+
 /* .dropdown-menu, .dropdown-menu:active{
     transform: translate3d(-136.5px, 10px, 0px) !important;
 } */
@@ -88,4 +103,107 @@ div.auth-links{
 .profile-info:focus {
     text-decoration: underline;
     outline: none;
+}
+
+.admin-info{
+    background-color: rgba(238, 195, 78, 0.877);
+    border-radius: 0.5rem;
+    padding: 15px;
+}
+
+.journey-full{
+    border: 0.8px solid rgb(229, 231, 235);
+    border-radius: 0.5em;
+    padding: 15px;
+    position: relative;
+}
+
+.journey-full-title{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 250px;
+    max-width: 300px;
+}
+
+.journey-full-jinfo{
+    overflow-wrap: break-word;
+    flex-grow: 1;
+}
+
+.journey-full-body{
+    display: flex;
+    margin-top: 8px;
+    flex-direction: column;
+}
+
+@media (min-width: 600px) {
+    .journey-full-body{
+        flex-direction: row;
+    }
+
+    .journey-full-image{
+        max-width: 400px;
+    }
+
+    .journey-full-jinfo{
+        max-width: 500px;
+        margin-left: 40px;
+        border-left: 0.5px solid black;
+        padding-left: 40px;
+    }
+}
+
+.journey-full-jinfo-title{
+    color:rgb(121, 117, 117);
+    font-weight: 300;
+}
+
+.journey-full-jinfo-description{
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.journey-full-jinfo-recommended{
+    text-transform: uppercase;
+    font-size: 22px;
+}
+
+.journey-full-uinfo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.journey-full-alter-buttons{
+    align-self: flex-start;
+    width: 180px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@media (min-width: 600px) {
+    .journey-full-alter-buttons{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+}
+
+@media (max-width: 600px) {
+    .journey-full-alter-buttons{
+        margin-top: 8px;
+    }
+
+    .journey-full-jinfo{
+        margin-top: 10px;
+    }
+}
+
+.journey-full-alter-button{
+    width:80px;
+    max-width: 80px;
 }
