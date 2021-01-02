@@ -5,15 +5,15 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="ml-4 flex-shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('journeys.index') }}">
                         <img class="app-logo app-logo-sm" src="{{ asset('/images/f593dd00-03da-4699-bbd0-468c33b3db5b_200x200.png') }}" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex text-gray-50">
-                    <x-nav-link class="text-gray-50" :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Home') }}
+                    <x-nav-link class="text-gray-50" :href="route('journeys.index')" :active="request()->routeIs('journeys.index')">
+                        {{ __('Feed') }}
                     </x-nav-link>
                     @if (Auth::user())
                     <x-nav-link class="text-gray-50" :href="route('users.show', Auth::user()->id)" :active="request()->routeIs('users.show', Auth::user()->id)">
@@ -88,8 +88,8 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Home') }}
+            <x-responsive-nav-link :href="route('journeys.index')" :active="request()->routeIs('journeys.index')">
+                {{ __('Feed') }}
             </x-responsive-nav-link>
             @if (Auth::user())
             <x-responsive-nav-link class="text-white" :href="route('users.show', Auth::user()->id)" :active="request()->routeIs('users.show', Auth::user()->id)">

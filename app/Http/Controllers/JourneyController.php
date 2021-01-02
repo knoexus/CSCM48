@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class JourneyController extends Controller
 {
+    public function index() {
+        $journeys = \App\Models\Journey::orderBy('created_at', 'desc')->take(100)->paginate(10);
+        return view('journeys.index', compact('journeys'));
+    }
+
     public function create(Request $req, $id) 
     {
         if ($id != auth()->id()) {

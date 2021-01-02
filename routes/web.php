@@ -14,8 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/feed');
 });
+
+Route::get('/feed', 'App\Http\Controllers\JourneyController@index')->name('journeys.index');
 
 Route::get('/users/{id}', 'App\Http\Controllers\UserController@show')->name('users.show');
 Route::get('/users/{id}/edit', 'App\Http\Controllers\UserController@edit')->name('users.edit')->middleware('auth');
