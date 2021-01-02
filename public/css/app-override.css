@@ -172,6 +172,12 @@ div.auth-links{
     flex-direction: column;
 }
 
+.journey-full-image{
+    object-fit: cover;
+    min-height: 200px;
+    min-width: 200px;
+}
+
 @media (min-width: 600px) {
     .journey-full-body{
         flex-direction: row;
@@ -189,7 +195,7 @@ div.auth-links{
         align-self: stretch;
         max-width: 500px;
         margin-left: 40px;
-        border-left: 0.5px solid black;
+        border-left: 0.8px solid lightgray;
         padding-left: 40px;
     }
 }
@@ -320,6 +326,21 @@ div.auth-links{
     }
 }
 
+.journey-image, .journey-image > img{
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
+    min-width: 200px;
+}
+
+@media(min-width: 800px){
+    .journey-image, .journey-image > img {
+        border-top-left-radius: 0.4rem;
+        border-bottom-left-radius: 0.4rem;
+    }
+}
+
 @media(max-width: 800px) {
     .journey-body {
         flex-direction: column;
@@ -335,20 +356,8 @@ div.auth-links{
     }
 
     .journey-image, .journey-image > image {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-radius: 0;
     }
-}
-
-.journey-image, .journey-image > img{
-    height: 200px;
-    width: 200px;
-    min-height: 200px;
-    min-width: 200px;
-    max-height: 200px;
-    max-width: 200px;
-    border-top-left-radius: 0.4rem;
-    border-bottom-left-radius: 0.4rem;
 }
 
 .journey:hover{
@@ -444,6 +453,11 @@ user */
 .user-picture {
     border-radius: 50%;
     box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    min-height: 200px;
+    min-width: 200px;
 }
 
 .user-main_info .user-name {
