@@ -3,7 +3,11 @@
 @section('content')
 <div class="container">
     <div class="journeys">
-        <h4 class="mt-3">View all recent journeys</h4>
+        @if($journeys->isNotEmpty())
+            <h4 class="mt-3">View all recent journeys</h4>
+        @else
+            <h4 class="mt-3">There are no recent journeys</h4>
+        @endif
         <div class="mt-4">
             @foreach($journeys as $journey)
             <div class="journey mt-4" onclick="window.location.href='/users/{{ $journey->user->id }}/journeys/{{ $journey->id }}';">

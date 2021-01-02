@@ -62,8 +62,6 @@ export default function Comments({data, journey, uId, admin}) {
         axios
             .delete(`/users/${journey.user_id}/journeys/${journey.id}/comments/${cId}`)
             .then(res => {
-                console.log(res);
-                // remove from comments
                 changeUData([...uData].filter(el => el.id !== cId));
             })
             .catch(err => console.error(err));
@@ -86,7 +84,7 @@ export default function Comments({data, journey, uId, admin}) {
 
                 <button type="submit" className="btn btn-primary">Submit</button>
             </form>
-            <div>
+            <div className="mt-3">
                 {
                     uData.length == 0 ? 
                         <span>No comments</span> 

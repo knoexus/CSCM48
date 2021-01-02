@@ -3,13 +3,17 @@
 @section('content')
 <div class="container mt-3">
     @if (Auth::user())
-        @if (Auth::user()->isAdmin() && Auth::user()->id != $user->id)
-        <div class="d-flex">
-            <form method="POST" action="{{ route('users.destroy', $user->id) }}">
-                @method('DELETE')
-                @csrf
-                <button class="btn btn-info" type="submit">Delete Profile</button>
-            </form>
+        @if (Auth::user()->isAdmin() && (Auth::user()->id != $user->id))
+        <div class="d-flex mb-4">
+            <div class="admin-info">
+                <h4>Admin panel</h4>
+                <span>Feel free to suspend the users if their actions are ambiguous.</span>
+                <form method="POST" action="{{ route('users.destroy', $user->id) }}">
+                    @method('DELETE')
+                    @csrf
+                    <button class="btn btn-outline-dark mt-2" type="submit">Delete Profile</button>
+                </form>
+            </div>
         </div>
         @endif
     @endif

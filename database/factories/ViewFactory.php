@@ -26,7 +26,6 @@ class ViewFactory extends Factory
         $users = User::pluck('id')->toArray();
         $journeys = Journey::pluck('id')->toArray();
         return [
-            'count' => $this->faker->numberBetween($min = 0, $max = 1000),
             'user_id' => $this->faker->randomElement($users), // or simply create new by using User::factory(),
             'journey_id' => $this->faker->randomElement($journeys) // or simply create new by using Journey::factory()
         ];

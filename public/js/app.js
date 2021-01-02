@@ -79159,8 +79159,6 @@ function Comments(_ref) {
   var deleteComment = function deleteComment(e, cId) {
     e.preventDefault();
     axios["delete"]("/users/".concat(journey.user_id, "/journeys/").concat(journey.id, "/comments/").concat(cId)).then(function (res) {
-      console.log(res); // remove from comments
-
       changeUData(_toConsumableArray(uData).filter(function (el) {
         return el.id !== cId;
       }));
@@ -79190,7 +79188,9 @@ function Comments(_ref) {
   }, bodyError))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
     type: "submit",
     className: "btn btn-primary"
-  }, "Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, uData.length == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "No comments") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, uData.map(function (comment) {
+  }, "Submit")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    className: "mt-3"
+  }, uData.length == 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, "No comments") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, uData.map(function (comment) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       key: comment.id,
       className: "mt-4 border journey-full-comment"
