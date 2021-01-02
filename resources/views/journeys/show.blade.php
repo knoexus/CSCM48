@@ -18,7 +18,6 @@
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/user.css') }}">   
-    <link rel="stylesheet" href="{{ asset('css/journey.css') }}">
 @endsection
 
 @section('content')
@@ -57,7 +56,7 @@
             <div class="journey-full-jinfo">
                 <div>
                     <span class="journey-full-jinfo-title">Description:</span><br>
-                    <span class="journey-full-jinfo-description">{{ $journey->description ?? "Not Set" }}</span>
+                    <p class="journey-full-jinfo-description">{{ $journey->description ?? "Not Set" }}</p>
                 </div>
                 <div class="mt-3">
                     <div>
