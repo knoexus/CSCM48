@@ -328,19 +328,27 @@ div.auth-links{
         flex-direction: row;
         margin-top: 20px;
     }
+
+    .journey-title {
+        margin-top: 10px;
+    }
+
+    .journey-image, .journey-image > image {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 }
 
 .journey-image, .journey-image > img{
-    border-top-left-radius: 0.4rem;
-    border-bottom-left-radius: 0.4rem;
     height: 200px;
     width: 200px;
     min-height: 200px;
     min-width: 200px;
     max-height: 200px;
     max-width: 200px;
+    border-top-left-radius: 0.4rem;
+    border-bottom-left-radius: 0.4rem;
 }
-
 
 .journey:hover{
     box-shadow: 0px 4px 8px rgba(14, 17, 43, 0.1), 0px 4px 5px rgba(62, 71, 134, 0.3);

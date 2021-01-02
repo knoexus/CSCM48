@@ -60,7 +60,7 @@
                             <img src="/storage/{{ $journey->image }}">
                         </div>
                         <div class="journey-info">
-                            <h4>{{ $journey->title }}</h4>
+                            <h4 class="journey-title">{{ $journey->title }}</h4>
                             <p class="journey-info-description">{{ $journey->description }}</p>
                             <div class="journey-info-subinfo">
                                 <span class="journey-info-subtitle">Enjoyability: {{ ($journey->enjoyability).' / 10' ?? "Not Set" }}</span>
