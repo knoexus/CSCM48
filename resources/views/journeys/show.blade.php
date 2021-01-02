@@ -52,7 +52,7 @@
             </div>
         @endif
         <div class="journey-full-body">
-            <img class="journey-full-image" src="/storage/{{ $journey->image }}">
+            <img class="journey-full-image" src="{{ $journey->image }}">
             <div class="journey-full-jinfo">
                 <div>
                     <span class="journey-full-jinfo-title">Description:</span><br>

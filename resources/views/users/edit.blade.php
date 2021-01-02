@@ -6,7 +6,7 @@
         @csrf
         <div class="form-group">
             <label for="country">Country</label>
-            <input type="text" class="form-control" name="country" placeholder="Country" value="{{ (old('country') || old('country') === '') ? old('country') : ($profile ? $profile->country: '') }}">
+            <input type="text" class="form-control" name="country" placeholder="Country" value="{{ (old('country') || old('country') === '') ? old('country') : ($profile ? $profile->country : '') }}">
             @if ($errors->has('country'))
                 <span class="text-danger">{{ $errors->first('country') }}</span>
             @endif
@@ -23,7 +23,7 @@
             @if ($profile)
                 @if ($profile->image)
                     <div class="mb-2">
-                        <img src="{{ '/storage/'.$profile->image }}" height="50" width="50"/>
+                        <img src="{{ $profile->image }}" height="50" width="50"/>
                     </div>
                 @endif        
             @endif

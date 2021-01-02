@@ -13,7 +13,7 @@
             <div class="journey mt-4" onclick="window.location.href='/users/{{ $journey->user->id }}/journeys/{{ $journey->id }}';">
                 <div class="journey-body">
                     <div class="journey-image">
-                        <img src="/storage/{{ $journey->image }}">
+                        <img src="{{ $journey->image }}">
                     </div>
                     <div class="journey-info">
                         <h4 class="journey-title">{{ $journey->title }}</h4>

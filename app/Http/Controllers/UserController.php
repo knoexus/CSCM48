@@ -47,7 +47,7 @@ class UserController extends Controller
 
         if ($req->image) {
             $imgPath = $req->file('image')->store('uploads', 'public'); 
-            $fields['image'] = $imgPath;
+            $fields['image'] = '/storage/'.$imgPath;
         }
         
         $profile = \App\Models\Profile::updateOrCreate(
@@ -55,7 +55,7 @@ class UserController extends Controller
             $fields
         );
 
-        return redirect('/');
+        return redirect('/users/'.$id);
     }
 
     public function destroy($id) 

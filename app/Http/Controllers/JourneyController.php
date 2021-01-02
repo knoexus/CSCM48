@@ -38,7 +38,7 @@ class JourneyController extends Controller
 
         $journey = \App\Models\Journey::create([
                 'title' => $req->title, 
-                'image' => $imgPath,
+                'image' => '/storage/'.$imgPath,
                 'difficulty' => intval($req->difficulty), 
                 'enjoyability' => intval($req->enjoyability), 
                 'would_recommend' => boolval($req->would_recommend), 
@@ -90,7 +90,7 @@ class JourneyController extends Controller
 
         if ($req->image) {
             $imgPath = $req->file('image')->store('uploads', 'public'); 
-            $fields['image'] = $imgPath;
+            $fields['image'] = '/storage/'.$imgPath;
         }
 
         $journey = \App\Models\Journey::where([

@@ -23,7 +23,7 @@
                 <div class="user-picture-container">
                     @if ($user->profile)
                         @if ($user->profile->image)
-                            <img class="user-picture" src="/storage/{{ $user->profile->image }}" alt="Profile picture" height="200" width="200"/>
+                            <img class="user-picture" src="{{ $user->profile->image }}" alt="Profile picture" height="200" width="200"/>
                         @else
                             <img class="user-picture" src="/images/no-user-image.gif" alt="profile Pic" height="200" width="200"/>
                         @endif
@@ -73,7 +73,7 @@
                 <div class="journey mt-4" onclick="window.location.href='/users/{{ $user->id }}/journeys/{{ $journey->id }}';">
                     <div class="journey-body">
                         <div class="journey-image">
-                            <img src="/storage/{{ $journey->image }}">
+                            <img src="{{ $journey->image }}">
                         </div>
                         <div class="journey-info">
                             <h4 class="journey-title">{{ $journey->title }}</h4>

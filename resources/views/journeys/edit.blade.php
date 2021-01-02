@@ -22,7 +22,7 @@
             @if ($journey)
                 @if ($journey->image)
                     <div class="mb-2">
-                        <img src="{{ '/storage/'.$journey->image }}" height="50" width="50"/>
+                        <img src="{{ $journey->image }}" height="50" width="50"/>
                     </div>
                 @endif        
             @endif
