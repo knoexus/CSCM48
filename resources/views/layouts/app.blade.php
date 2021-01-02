@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="user-id" content="{{ optional(Auth::user())->id }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>JourneySpace</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
@@ -34,6 +34,7 @@
                 @section('content')
                 @show
             </main>
+            @include('layouts.footer')
         </div>
     </body>
 </html>

@@ -16,10 +16,6 @@
     @endif
 @endsection
 
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css/user.css') }}">   
-@endsection
-
 @section('content')
 <div class="container p-1 mt-2">
     @if (Auth::user())
