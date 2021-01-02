@@ -258,6 +258,7 @@ div.auth-links{
     display: flex;
     flex-direction: column;
     padding-right: 15px;
+    background-color: #f8fbff;
 }
 
 .journey-body {
@@ -436,4 +437,112 @@ a.journey-referrer {
     top: 5px;
     right: 5px;
     max-height: 20px;
+}
+/* 
+user */
+
+.user-picture {
+    border-radius: 50%;
+    box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.user-main_info .user-name {
+    font-size: 32px;
+    font-weight: 500;
+}
+
+.user-main_info .user-username {
+    font-size: 22px;
+    font-weight: 100;
+}
+
+a.user-username{
+    color: gray; 
+}
+
+a.user-username:hover{
+    color: gray; 
+}
+
+.user-username::before {
+    content: "@";
+    color: gray;
+}
+
+.user-main_info {
+    padding: 3.5px;
+}
+
+.user-main_info::after {
+    content: "\a0";
+    display: block;
+    margin-top: 1rem;
+    line-height: 1px;
+    border-top: 0.8px solid lightgray; 
+}
+
+.user-main_info-juice {
+    display: flex;
+    flex-direction: row;
+}
+
+.user-main_info-juice-primary{
+    display: flex;
+    flex-direction: row;
+}
+
+.user-main_info-juice-secondary{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.user-main_info-juice-secondary > a {
+    max-width: 120px;
+    margin-top: 10px;
+}
+
+@media(max-width: 600px) {
+    .user-main_info-juice-primary{
+        flex-direction: column;
+    }
+}
+
+@media(min-width: 600px) {
+    .user-names {
+        margin-left: 25px;
+        margin-top: 20px;
+    }
+}
+
+@media(max-width: 600px) {
+    .user-names {
+        text-align: center;
+    }
+
+    .user-main_info-juice-primary{
+        align-items: center;
+    }
+}
+
+@media(max-width: 900px) {
+    .user-main_info-juice {
+        flex-direction: column;
+    }
+
+    .user-main_info-juice-secondary{
+        margin-top: 15px;
+        border-top: 0.8px solid lightgray;
+        padding-top: 10px;
+    }
+}
+
+@media(min-width: 900px) {
+    .user-main_info-juice-secondary{
+        flex-grow: 1;
+        align-self: stretch;
+        margin-left: 50px;
+        border-left: 0.8px solid lightgray; 
+        padding-left: 50px;
+    }
 }

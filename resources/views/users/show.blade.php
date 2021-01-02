@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('styles')
-    <link rel="stylesheet" href="{{ asset('css/user.css') }}">
-@endsection
-
 @section('content')
 <div class="container mt-3">
     @if (Auth::user())
@@ -18,21 +14,37 @@
         @endif
     @endif
     <div class="user-main_info">
-        <div class="d-flex">
-            <div>
-                @if ($user->profile)
-                    @if ($user->profile->image)
-                        <img class="user-picture" src="/storage/{{ $user->profile->image }}" alt="profile Pic" height="200" width="200"/>
+        <div class="user-main_info-juice">
+            <div class="user-main_info-juice-primary">
+                <div class="user-picture-container">
+                    @if ($user->profile)
+                        @if ($user->profile->image)
+                            <img class="user-picture" src="/storage/{{ $user->profile->image }}" alt="Profile picture" height="200" width="200"/>
+                        @else
+                            <img class="user-picture" src="/images/no-user-image.gif" alt="profile Pic" height="200" width="200"/>
+                        @endif
+                    @else
+                        <img class="user-picture" src="/images/no-user-image.gif" alt="profile Pic" height="200" width="200"/>
                     @endif
-                @endif
-            </div>
-            <div class="ml-4 d-flex flex-column">
-                <div class="mt-4">
-                    <h3>{{ $user->first_name }} {{ $user->last_name }}</h3>
-                    <h4 class="user-username">{{ $user->user_name }}</h4>
+                </div>
+                <div class="user-names">
+                    <span class="user-name">{{ $user->first_name }} {{ $user->last_name }}</span><br>
+                    <span class="user-username">{{ $user->user_name }}</span>
                 </div>
             </div>
-            <div class="ml-4">
+            <div class="user-main_info-juice-secondary">
+                @if ( $user->profile )
+                <div>
+                    <div>
+                        <h4>Country: </h4>
+                        <span>{{ $user->profile->country ?? "Unknown" }}</span>
+                    </div>
+                    <div class="mt-2">
+                        <h4>Description: </h4>
+                        <span>{{ $user->profile->description ?? "Not set" }}</span>
+                    </div>
+                </div>
+                @endif
                 @if (Auth::user())
                     @if (Auth::user()->id == $user->id)
                         @if (!Auth::user()->isAdmin())
