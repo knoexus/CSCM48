@@ -103,7 +103,7 @@ export default class Notifications extends Component {
 
 
 const ntfs = document.querySelector('.notifications');
-if (ntfs) {
-    const uId = document.querySelector("meta[name='user-id']").getAttribute('content');
+const uId = document.querySelector("meta[name='user-id']").getAttribute('content');
+if (ntfs && uId) {
     ReactDOM.render(<Notifications uId={uId}/>, ntfs);
 }

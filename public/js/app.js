@@ -79531,12 +79531,11 @@ var Notifications = /*#__PURE__*/function (_Component) {
 
 
 var ntfs = document.querySelector('.notifications');
+var uId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
-if (ntfs) {
-  var _uId = document.querySelector("meta[name='user-id']").getAttribute('content');
-
+if (ntfs && uId) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Notifications, {
-    uId: _uId
+    uId: uId
   }), ntfs);
 }
 
