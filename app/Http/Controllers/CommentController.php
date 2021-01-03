@@ -12,7 +12,7 @@ class CommentController extends Controller
         if ($req->ajax()) {
             $startId = $req->query('startId');
             $take = $req->query('take');
-            $comments = \App\Models\Comment::where('journey_id', 1)->orderBy('created_at', 'desc')->where('id', '<', (int)$startId)->limit((int)$take)->with('user')->get();
+            $comments = \App\Models\Comment::where('journey_id', $journey_id)->orderBy('created_at', 'desc')->where('id', '<', (int)$startId)->limit((int)$take)->with('user')->get();
             if ($comments) {
                 return response()->json([
                     'comments' => $comments

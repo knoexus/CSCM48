@@ -79088,28 +79088,34 @@ function Comments(_ref) {
   var data = _ref.data,
       journey = _ref.journey,
       uId = _ref.uId,
-      admin = _ref.admin;
+      admin = _ref.admin,
+      commentCount = _ref.commentCount;
   var hardLimit = 5;
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(commentCount),
       _useState2 = _slicedToArray(_useState, 2),
-      uData = _useState2[0],
-      changeUData = _useState2[1];
+      _commentCount = _useState2[0],
+      changeCommentCount = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data.length < hardLimit),
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data),
       _useState4 = _slicedToArray(_useState3, 2),
-      noFetch = _useState4[0],
-      changeNoFetch = _useState4[1];
+      uData = _useState4[0],
+      changeUData = _useState4[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(data.length < hardLimit),
       _useState6 = _slicedToArray(_useState5, 2),
-      commentValue = _useState6[0],
-      changeCommentValue = _useState6[1];
+      noFetch = _useState6[0],
+      changeNoFetch = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(''),
       _useState8 = _slicedToArray(_useState7, 2),
-      bodyError = _useState8[0],
-      changeBodyError = _useState8[1];
+      commentValue = _useState8[0],
+      changeCommentValue = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState10 = _slicedToArray(_useState9, 2),
+      bodyError = _useState10[0],
+      changeBodyError = _useState10[1];
 
   var submitForm = function submitForm(e) {
     e.preventDefault();
@@ -79120,6 +79126,7 @@ function Comments(_ref) {
       if (res.data.errors) {
         changeBodyError(res.data.errors[0]);
       } else {
+        changeCommentCount(_commentCount + 1);
         changeUData(function () {
           var obj = _objectSpread(_objectSpread({}, res.data.comment), {}, {
             user: _objectSpread({}, res.data.user)
@@ -79159,6 +79166,7 @@ function Comments(_ref) {
   var deleteComment = function deleteComment(e, cId) {
     e.preventDefault();
     axios["delete"]("/users/".concat(journey.user_id, "/journeys/").concat(journey.id, "/comments/").concat(cId)).then(function (res) {
+      changeCommentCount(_commentCount - 1);
       changeUData(_toConsumableArray(uData).filter(function (el) {
         return el.id !== cId;
       }));
@@ -79167,7 +79175,7 @@ function Comments(_ref) {
     });
   };
 
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Comments ", "(".concat(uData.length, ")")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Comments ", "(".concat(_commentCount, ")")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
     onSubmit: function onSubmit(e) {
       return submitForm(e);
     }
@@ -79226,13 +79234,16 @@ var uId = document.querySelector("meta[name='user-id']").getAttribute('content')
 var data = window.xcomments || null;
 var journey = window.xjourney || null;
 var admin = window.xadmin || null;
+var commentCount = window.xcommentcount || null;
+console.log(window.xcommentcount);
 
-if (comments && data && journey) {
+if (comments && data && journey, commentCount) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comments, {
     data: data,
-    admin: xadmin,
+    admin: admin,
     journey: journey,
-    uId: uId
+    uId: uId,
+    commentCount: commentCount
   }), comments);
 }
 

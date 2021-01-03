@@ -9,7 +9,7 @@ class UserController extends Controller
     public function show($id) 
     {
         $user = \App\Models\User::findOrFail($id);
-        $journeys = $user->journeys()->paginate(5);
+        $journeys = $user->journeys()->orderBy('created_at', 'desc')->paginate(5);
         return view('users.show', compact('user', 'journeys'));
     }
 

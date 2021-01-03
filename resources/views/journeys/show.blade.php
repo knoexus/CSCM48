@@ -3,6 +3,7 @@
 @section('scripts')
     <script>
         window.xcomments = @json($comments);
+        window.xcommentcount = @json($journey->comments->count());
         window.xjourney = @json($journey);
     </script>
     @if (Auth::user())

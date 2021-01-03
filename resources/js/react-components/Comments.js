@@ -2,8 +2,9 @@ import React, { Fragment, useState } from 'react';
 import ReactDOM from 'react-dom';
 import moment from 'moment';
 
-export default function Comments({data, journey, uId, admin}) {
+export default function Comments({data, journey, uId, admin, commentCount}) {
     const hardLimit = 5;
+    const [_commentCount, changeCommentCount] = useState(commentCount);
     const [uData, changeUData] = useState(data);
     const [noFetch, changeNoFetch] = useState(data.length < hardLimit);
     const [commentValue, changeCommentValue] = useState('');
@@ -20,6 +21,7 @@ export default function Comments({data, journey, uId, admin}) {
                     changeBodyError(res.data.errors[0]);
                 }
                 else {
+                    changeCommentCount(_commentCount+1);
                     changeUData(() => {
                         const obj = {
                             ...res.data.comment,
@@ -62,6 +64,7 @@ export default function Comments({data, journey, uId, admin}) {
         axios
             .delete(`/users/${journey.user_id}/journeys/${journey.id}/comments/${cId}`)
             .then(res => {
+                changeCommentCount(_commentCount-1);
                 changeUData([...uData].filter(el => el.id !== cId));
             })
             .catch(err => console.error(err));
@@ -69,7 +72,7 @@ export default function Comments({data, journey, uId, admin}) {
 
     return (
         <Fragment>
-            <h4>Comments {`(${uData.length})`}</h4>
+            <h4>Comments {`(${_commentCount})`}</h4>
             <form onSubmit={e => submitForm(e)}>
                 <div className="form-group mt-3">
                     <label>New comment:</label>
@@ -122,6 +125,8 @@ const uId = document.querySelector("meta[name='user-id']").getAttribute('content
 const data = window.xcomments || null;
 const journey = window.xjourney || null;
 const admin = window.xadmin || null;
-if (comments && data && journey) {
-    ReactDOM.render(<Comments data={data} admin={xadmin} journey={journey} uId={uId}/>, comments);
+const commentCount = window.xcommentcount || null;
+console.log(window.xcommentcount);
+if (comments && data && journey, commentCount) {
+    ReactDOM.render(<Comments data={data} admin={admin} journey={journey} uId={uId} commentCount={commentCount}/>, comments);
 }

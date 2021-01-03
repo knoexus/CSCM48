@@ -69,7 +69,7 @@
                 </div>
                 @endif
             <div>
-                @foreach($journeys->sortByDesc('created_at') as $journey)
+                @foreach($journeys as $journey)
                 <div class="journey mt-4" onclick="window.location.href='/users/{{ $user->id }}/journeys/{{ $journey->id }}';">
                     <div class="journey-body">
                         <div class="journey-image">
