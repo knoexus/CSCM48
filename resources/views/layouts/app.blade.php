@@ -27,7 +27,7 @@
         @show
     </head>
     <body class="font-sans antialiased">
-        <div class="body-inner min-h-screen">
+        <div class="body-inner min-h-screen position: relative">
             @include('layouts.navigation')
             <!-- Page Content -->
             <main>
