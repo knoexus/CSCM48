@@ -28,7 +28,7 @@ class CommentController extends Controller
     public function destroy(Request $req, $id, $journey_id, $comment_id) {
         $comment = \App\Models\Comment::where([
             ['journey_id', $journey_id],
-            ['user_id', auth()->id()],
+            // ['user_id', auth()->id()],
             ['id', $comment_id],
         ])->first();
         
