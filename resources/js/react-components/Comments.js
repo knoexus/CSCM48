@@ -112,7 +112,7 @@ export default function Comments({data, journey, uId, admin, commentCount}) {
                         </Fragment>
 
                 }
-                { !noFetch && <button className="btn btn-outline-secondary mt-5" onClick={() => fetchNext()}>Fetch next 5 comments ...</button> }
+                { !noFetch && <button className="btn btn-outline-secondary mt-5" onClick={() => fetchNext()}>Fetch next { hardLimit } comments ...</button> }
             </div>
         </Fragment>
     )
@@ -125,8 +125,7 @@ const uId = document.querySelector("meta[name='user-id']").getAttribute('content
 const data = window.xcomments || null;
 const journey = window.xjourney || null;
 const admin = window.xadmin || null;
-const commentCount = window.xcommentcount || null;
-console.log(window.xcommentcount);
-if (comments && data && journey, commentCount) {
+const commentCount = window.xcommentcount || 0;
+if (comments && data && journey && (commentCount !== undefined || (commentCount !== null))) {
     ReactDOM.render(<Comments data={data} admin={admin} journey={journey} uId={uId} commentCount={commentCount}/>, comments);
 }

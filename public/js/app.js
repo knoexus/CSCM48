@@ -79226,7 +79226,7 @@ function Comments(_ref) {
     onClick: function onClick() {
       return fetchNext();
     }
-  }, "Fetch next 5 comments ...")));
+  }, "Fetch next ", hardLimit, " comments ...")));
 }
 var comments = document.querySelector('.comments');
 var uId = document.querySelector("meta[name='user-id']").getAttribute('content'); // const data = JSON.parse(comments.dataset.comments);
@@ -79234,10 +79234,9 @@ var uId = document.querySelector("meta[name='user-id']").getAttribute('content')
 var data = window.xcomments || null;
 var journey = window.xjourney || null;
 var admin = window.xadmin || null;
-var commentCount = window.xcommentcount || null;
-console.log(window.xcommentcount);
+var commentCount = window.xcommentcount || 0;
 
-if (comments && data && journey, commentCount) {
+if (comments && data && journey && (commentCount !== undefined || commentCount !== null)) {
   react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Comments, {
     data: data,
     admin: admin,
